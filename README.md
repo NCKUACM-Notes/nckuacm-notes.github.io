@@ -1,7 +1,19 @@
-# Yung-Sheng's Notes
+# NCKU ACM Notes
 
-Welcome to Yung-Sheng's notes!
+![](./res/nckuacm_banner.png)
 
-This blog is made by Jekyll and using [Hyde](https://github.com/poole/hyde) theme as basic theme. If you have any suggestions or questions about this blog, feel free to contact me.
+This website is managed by NCKU ACM Training Course Team.
 
-Please visit: [https://yungshenglu.github.io/](https://yungshenglu.github.io/) to view the site.
+## Course
+
+### 2018 Spring
+
+* [課程連結](2018_Spring/)
+    * [寒訓網站](https://toolbuddy.github.io/acp_cheatsheet/2018_spring/index.html)
+    * [課程網站](https://toolbuddy.github.io/acp_cheatsheet/2018_spring/course.html)
+
+---
+
+## Reference
+
+* [C++ STL \<algorithm\> 使用](http://www.cplusplus.com/reference/algorithm/)
