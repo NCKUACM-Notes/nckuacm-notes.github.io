@@ -1,6 +1,6 @@
 # NCKU ACM Notes
 
-![](./res/nckuacm_banner.png)
+![](https://i.imgur.com/5jSeMTH.png)
 
 This website is managed by NCKU ACM Training Course Team.
 
