@@ -6,6 +6,10 @@ layout: default
   <h1 class="post-title">{{ page.title }}</h1>
   <span class="post-date">
     <span class="fa-stack fa-sm">
+      <i class="fa fa-pencil-o fa-stack-1x"></i>
+    </span>
+    Posted by {{ page.author }}
+    <span class="fa-stack fa-sm">
       <i class="fa fa-clock-o fa-stack-1x"></i>
     </span>
     {{ page.date | date_to_string }}
