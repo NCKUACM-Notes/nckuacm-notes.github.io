@@ -132,7 +132,7 @@
     margin-top: 0.5rem;
 }
 .theme-base-chocolate .post .post-title a {
-    color: #ffffff;
+    color: #ac4142;
 }
 .theme-base-chocolate .post .post-title a:hover {
     text-decoration: none;
@@ -179,7 +179,7 @@
     color: #bf4d28;
 }
 .theme-base-chocolate .tag-summary a {
-    color: #ffffff;
+    color: #ac4142;
 }
 .theme-base-chocolate .tag-summary a:hover {
     color: #bf4d28;
@@ -226,7 +226,7 @@
     }
 }
 .theme-base-chocolate .archive a {
-    color: #ffffff;
+    color: #ac4142;
 }
 .theme-base-chocolate .archive a:hover {
     color: #bf4d28;
