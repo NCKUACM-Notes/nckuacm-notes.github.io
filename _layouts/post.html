@@ -1,0 +1,87 @@
+---
+layout: default
+---
+
+<div class="post">
+  <h1 class="post-title">{{ page.title }}</h1>
+  <span class="post-date">
+    <span class="fa-stack fa-sm">
+      <i class="fa fa-clock-o fa-stack-1x"></i>
+    </span>
+    {{ page.date | date_to_string }}
+    {% if page.slides != null %}
+        <span class="post-slides" style="margin: 0 0.5em">
+          <span class="fa-stack fa-sm">
+            <i class="fa fa-bookmark fa-stack-1x"></i>
+          </span>
+          <a href="{{ page.slides }}">Slides</a>
+        </span>
+    {% endif %}
+    
+    {% if page.present != null %}
+        <span class="post-slides" style="margin: 0 0.5em">
+          <span class="fa-stack fa-sm">
+            <i class="fa fa-eye fa-stack-1x"></i>
+          </span>
+          <a href="{{ page.present }}">Present Live</a>
+        </span>
+    {% endif %}
+
+    {% if page.github != null %}
+        <span class="post-slides" style="margin: 0 0.5em">
+          <span class="fa-stack fa-sm">
+            <i class="fa fa-github fa-stack-1x"></i>
+          </span>
+          <a href="{{ page.github }}">GitHub</a>
+        </span>
+    {% endif %}
+
+    {% if page.link != null %}
+        <span class="post-slides" style="margin: 0 0.5em">
+          <span class="fa-stack fa-sm">
+            <i class="fa fa-external-link fa-stack-1x"></i>
+          </span>
+          <a href="{{ page.link }}">Source Link</a>
+        </span>
+    {% endif %}
+  </span>
+ 
+  {{ content }}
+  <div class="post-tag">
+    <span class="fa-stack fa-sm">
+      <i class="fa fa-tags fa-stack-1x"></i>
+    </span>
+    : {% for tag in page.tags %} <a class="tag-wrapper" href="/tags/{{ tag }}" title="View posts tagged with &quot;{{ tag }}&quot;"><span class="tags">{{ tag }}</span></a>  {% if forloop.last != true %} {% endif %} {% endfor %}
+  </div>
+  <div
+    class="fb-like social-plugins"
+    data-layout="button"
+    data-action="like"
+    data-share="true">
+  </div>
+
+</div>
+
+{% if page.author == "Yung-Sheng Lu" %}
+{% include yungshenglu.html %}
+{% endif %}
+
+{% if page.author == "NCKU-ACM" %}
+{% include signature.html %}
+{% endif %}
+
+<div class="related">
+  <h2>Related Posts</h2>
+  <ul class="related-posts">
+    {% for post in site.related_posts limit:3 %}
+      <li>
+        <h3>
+          <a href="{{ post.url }}">
+            {{ post.title }}
+            <small>{{ post.date | date_to_string }}</small>
+          </a>
+        </h3>
+      </li>
+    {% endfor %}
+  </ul>
+</div>

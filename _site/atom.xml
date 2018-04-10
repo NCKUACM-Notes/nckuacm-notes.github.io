@@ -1,0 +1,1061 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+ <title>NCKU ACM Notes</title>
+ <link href="https://nckuacm.github.io//atom.xml" rel="self"/>
+ <link href="https://nckuacm.github.io//"/>
+ <updated>2018-04-11T01:04:32+08:00</updated>
+ <id>https://nckuacm.github.io/</id>
+ <author>
+   <name></name>
+   <email></email>
+ </author>
+
+ 
+ <entry>
+   <title>UVA-11264 - Coin Collector</title>
+   <link href="https://nckuacm.github.io//2018/04/09/UVA11264/"/>
+   <updated>2018-04-10T02:00:00+08:00</updated>
+   <id>https://nckuacm.github.io//2018/04/09/UVA11264</id>
+   <content type="html">&lt;blockquote&gt;
+  &lt;ul&gt;
+    &lt;li&gt;UVa Online Judge 解題結果請於 Submit 後，參閱 &lt;a href=&quot;https://uhunt.onlinejudge.org/&quot;&gt;uHunt&lt;/a&gt;。&lt;/li&gt;
+    &lt;li&gt;如果你有任何建議與指教，歡迎於下方留言一起討論喔！&lt;/li&gt;
+    &lt;li&gt;本題選為「20170926 大學程式能力檢定 CPE」題目。&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&quot;題意概要&quot;&gt;題意概要&lt;/h2&gt;
+
+&lt;p&gt;假設某個國家流通的硬幣共有 $n$ 種，為了要儘可能的收集最多種不同的硬幣。假設從銀行提領 &lt;script type=&quot;math/tex&quot;&gt;X&lt;/script&gt; 元，而銀行會按照下列演算法兌換硬幣：&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;withdraw(X) {
+    if (X == 0) return;
+    令 Y 為其值不超過 X 且面額最大的硬幣。
+    給客戶一個 Y 元的硬幣。
+    withdraw(X - Y);
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;本題在不限制金額的前提下，想要在一次提領中兌換到最多種不同的硬幣。&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;分析：&lt;/strong&gt;本題為簡單的貪婪法實作。為了要換到最多總硬幣，我們會先從面額最大的硬幣 &lt;script type=&quot;math/tex&quot;&gt;C_{n-1}&lt;/script&gt; 選取，其中「面額最大的硬幣 &lt;script type=&quot;math/tex&quot;&gt;C_{n-1}&lt;/script&gt; 一定要選」，原因很簡單，如果總金額沒有換到最大面額的硬幣，換言之，就是總金額小於最的面額的硬幣，否則一定可以將總金額用最大面額的硬幣換盡，剩下不足的部分，在用其他硬幣兌換。本題使用貪婪法的關鍵：假設 &lt;script type=&quot;math/tex&quot;&gt;S(i)&lt;/script&gt; 是 &lt;script type=&quot;math/tex&quot;&gt;C_1&lt;/script&gt;, &lt;script type=&quot;math/tex&quot;&gt;C_2&lt;/script&gt;, …, &lt;script type=&quot;math/tex&quot;&gt;C_i&lt;/script&gt; 這些硬幣被選中的幣值總和，必定會有 &lt;script type=&quot;math/tex&quot;&gt;% &lt;![CDATA[
+S(i) &lt; C_{i+1} %]]&gt;&lt;/script&gt;，原因很簡單，如果出現 &lt;script type=&quot;math/tex&quot;&gt;S(i) \le C_{i+1}&lt;/script&gt;，銀行會優先兌換 &lt;script type=&quot;math/tex&quot;&gt;C_{i+1}&lt;/script&gt; 的硬幣。因此，可以找到一個兌換的順序：如果有 &lt;script type=&quot;math/tex&quot;&gt;% &lt;![CDATA[
+S(i-1) &lt; C_i %]]&gt;&lt;/script&gt; 且 &lt;script type=&quot;math/tex&quot;&gt;% &lt;![CDATA[
+S(i) = S(i-1) + C_i &lt; C_{i+1} %]]&gt;&lt;/script&gt;，則 &lt;script type=&quot;math/tex&quot;&gt;C_{i}&lt;/script&gt; 會被選中。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+&lt;h2 id=&quot;input&quot;&gt;Input&lt;/h2&gt;
+
+&lt;p&gt;First line of the input contains &lt;script type=&quot;math/tex&quot;&gt;T&lt;/script&gt; the number of test cases. Each of the test cases starts with &lt;script type=&quot;math/tex&quot;&gt;n&lt;/script&gt;
+(&lt;script type=&quot;math/tex&quot;&gt;1 \le n \le 1,000&lt;/script&gt;), the number of different types of coin. Next line contains &lt;script type=&quot;math/tex&quot;&gt;n&lt;/script&gt; integers &lt;script type=&quot;math/tex&quot;&gt;C_1&lt;/script&gt;, &lt;script type=&quot;math/tex&quot;&gt;C_2&lt;/script&gt;, . . . , &lt;script type=&quot;math/tex&quot;&gt;C_n&lt;/script&gt; the value of each coin type. &lt;script type=&quot;math/tex&quot;&gt;% &lt;![CDATA[
+C_1 &lt; C_2 &lt; C_3 &lt; . . . &lt; C_n &lt; 1,000,000,000 %]]&gt;&lt;/script&gt;. &lt;script type=&quot;math/tex&quot;&gt;C_1&lt;/script&gt; equals to &lt;script type=&quot;math/tex&quot;&gt;1&lt;/script&gt;.&lt;/p&gt;
+
+&lt;hr /&gt;
+&lt;h2 id=&quot;output&quot;&gt;Output&lt;/h2&gt;
+
+&lt;p&gt;For each test case output one line denoting the maximum number of coins that Sultan can collect in a single withdrawal. He can withdraw infinite amount of money from the Bank.&lt;/p&gt;
+
+&lt;hr /&gt;
+&lt;h2 id=&quot;sample-input&quot;&gt;Sample Input&lt;/h2&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;2
+6
+1 2 4 8 16 32
+6
+1 3 6 8 15 20
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;hr /&gt;
+&lt;h2 id=&quot;sample-output&quot;&gt;Sample Output&lt;/h2&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;6
+4
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>UVA-696 - How Many Knights</title>
+   <link href="https://nckuacm.github.io//2018/04/08/UVA696/"/>
+   <updated>2018-04-09T02:00:00+08:00</updated>
+   <id>https://nckuacm.github.io//2018/04/08/UVA696</id>
+   <content type="html">&lt;blockquote&gt;
+  &lt;ul&gt;
+    &lt;li&gt;UVa Online Judge 解題結果請於 Submit 後，參閱 &lt;a href=&quot;https://uhunt.onlinejudge.org/&quot;&gt;uHunt&lt;/a&gt;。&lt;/li&gt;
+    &lt;li&gt;如果你有任何建議與指教，歡迎於下方留言一起討論喔！&lt;/li&gt;
+    &lt;li&gt;本題選為「20170926 大學程式能力檢定 CPE」題目。&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&quot;題意概要&quot;&gt;題意概要&lt;/h2&gt;
+
+&lt;p&gt;在西洋棋裡面的騎士，走法和中國象棋的走法很類似，是走「日」字的對角格。如下圖所示，假設格子裡的 N 為騎士的所在位置，而圖中 X 為騎士可以走的下一步，所以本題希望在給定棋盤大小後，算出可以容納的最多騎士個數，且騎士之間彼此不能被攻擊到。&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt;X&lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt;X&lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;X&lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt;X&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt;N&lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;X&lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt;X&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt;X&lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt;X&lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;分析：&lt;/strong&gt;本題為簡單的數學推論題。我們可以先固定給定的棋盤大小表示為「&lt;script type=&quot;math/tex&quot;&gt;M \times N&lt;/script&gt;」且 &lt;script type=&quot;math/tex&quot;&gt;M \le N&lt;/script&gt;。接下來針對簡單的情形討論：
+    &lt;ul&gt;
+      &lt;li&gt;當 &lt;script type=&quot;math/tex&quot;&gt;M = 1&lt;/script&gt; 時：此時棋盤上的每一格都可以放騎士，且彼此不會被攻擊。&lt;/li&gt;
+      &lt;li&gt;當 &lt;script type=&quot;math/tex&quot;&gt;M = 2&lt;/script&gt; 時：此時可以將 &lt;script type=&quot;math/tex&quot;&gt;N&lt;/script&gt; 分為每四欄一段，且在每一段中最多放置四個騎士，未滿四欄的區段，若格數少於 &lt;script type=&quot;math/tex&quot;&gt;3&lt;/script&gt; 格，則將「欄數成乘上 &lt;script type=&quot;math/tex&quot;&gt;2&lt;/script&gt; 倍」即是可以放置騎士的個數，如下圖所示。&lt;/li&gt;
+    &lt;/ul&gt;
+
+    &lt;table&gt;
+      &lt;tbody&gt;
+        &lt;tr&gt;
+          &lt;td&gt;N&lt;/td&gt;
+          &lt;td&gt;N&lt;/td&gt;
+          &lt;td&gt; &lt;/td&gt;
+          &lt;td&gt; &lt;/td&gt;
+          &lt;td&gt;N&lt;/td&gt;
+          &lt;td&gt;N&lt;/td&gt;
+          &lt;td&gt; &lt;/td&gt;
+          &lt;td&gt; &lt;/td&gt;
+          &lt;td&gt;N&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+          &lt;td&gt;N&lt;/td&gt;
+          &lt;td&gt;N&lt;/td&gt;
+          &lt;td&gt; &lt;/td&gt;
+          &lt;td&gt; &lt;/td&gt;
+          &lt;td&gt;N&lt;/td&gt;
+          &lt;td&gt;N&lt;/td&gt;
+          &lt;td&gt; &lt;/td&gt;
+          &lt;td&gt; &lt;/td&gt;
+          &lt;td&gt;N&lt;/td&gt;
+        &lt;/tr&gt;
+      &lt;/tbody&gt;
+    &lt;/table&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;當 &lt;script type=&quot;math/tex&quot;&gt;M \le 3&lt;/script&gt; 時：只能「間隔一欄且間隔一列」放置，才能放置最多的騎士個數，如下圖所示。&lt;/li&gt;
+    &lt;/ul&gt;
+
+    &lt;table&gt;
+      &lt;tbody&gt;
+        &lt;tr&gt;
+          &lt;td&gt;N&lt;/td&gt;
+          &lt;td&gt; &lt;/td&gt;
+          &lt;td&gt;N&lt;/td&gt;
+          &lt;td&gt; &lt;/td&gt;
+          &lt;td&gt;N&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+          &lt;td&gt; &lt;/td&gt;
+          &lt;td&gt;N&lt;/td&gt;
+          &lt;td&gt; &lt;/td&gt;
+          &lt;td&gt;N&lt;/td&gt;
+          &lt;td&gt; &lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+          &lt;td&gt;N&lt;/td&gt;
+          &lt;td&gt; &lt;/td&gt;
+          &lt;td&gt;N&lt;/td&gt;
+          &lt;td&gt; &lt;/td&gt;
+          &lt;td&gt;N&lt;/td&gt;
+        &lt;/tr&gt;
+      &lt;/tbody&gt;
+    &lt;/table&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+&lt;h2 id=&quot;input&quot;&gt;Input&lt;/h2&gt;
+
+&lt;p&gt;The input consists of pairs of integers giving values for M and N, followed by a pair of zeroes.&lt;/p&gt;
+
+&lt;hr /&gt;
+&lt;h2 id=&quot;output&quot;&gt;Output&lt;/h2&gt;
+
+&lt;p&gt;For each input pair, display the number of rows and columns in the board, and the number of knights that can be appropriately placed.&lt;/p&gt;
+
+&lt;hr /&gt;
+&lt;h2 id=&quot;sample-input&quot;&gt;Sample Input&lt;/h2&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;2 3
+5 5
+4 7
+0 0
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;hr /&gt;
+&lt;h2 id=&quot;sample-output&quot;&gt;Sample Output&lt;/h2&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;4 knights may be placed on a 2 row 3 column board.
+13 knights may be placed on a 5 row 5 column board.
+14 knights may be placed on a 4 row 7 column board.
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>UVA-11743 - Credit Check</title>
+   <link href="https://nckuacm.github.io//2018/04/07/UVA11743/"/>
+   <updated>2018-04-08T02:00:00+08:00</updated>
+   <id>https://nckuacm.github.io//2018/04/07/UVA11743</id>
+   <content type="html">&lt;blockquote&gt;
+  &lt;ul&gt;
+    &lt;li&gt;UVa Online Judge 解題結果請於 Submit 後，參閱 &lt;a href=&quot;https://uhunt.onlinejudge.org/&quot;&gt;uHunt&lt;/a&gt;。&lt;/li&gt;
+    &lt;li&gt;如果你有任何建議與指教，歡迎於下方留言一起討論喔！&lt;/li&gt;
+    &lt;li&gt;本題選為「20170926 大學程式能力檢定 CPE」題目。&lt;/li&gt;
+    &lt;li&gt;&lt;strong&gt;相同題目：&lt;/strong&gt;ZOJ-a159&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&quot;題意概要&quot;&gt;題意概要&lt;/h2&gt;
+
+&lt;p&gt;因為信用卡卡號較長，很容易在輸入的時候打錯。為了快速的識別錯誤，如數字打錯，大多數的電子商務網站都會用一種校檢演算法來確認信用卡卡號，其中有一種較為流行的檢驗演算法叫做 Luhn 演算法 (Luhn algorithm)，它可以檢測任何一位元的錯誤及多位元錯誤：&lt;/p&gt;
+&lt;ol&gt;
+  &lt;li&gt;從倒數第二個位元開始，將他們放到後面，並且加倍其他沒有移動的位元到另一個列表&lt;/li&gt;
+  &lt;li&gt;把列表內的數字的位元加總 (&lt;script type=&quot;math/tex&quot;&gt;n&lt;/script&gt;)，再把被移到後面的數字加總 (&lt;script type=&quot;math/tex&quot;&gt;m&lt;/script&gt;)，在把兩個數加起來 (&lt;script type=&quot;math/tex&quot;&gt;n + m&lt;/script&gt;)&lt;/li&gt;
+  &lt;li&gt;如果這個數字的結尾是 &lt;script type=&quot;math/tex&quot;&gt;0&lt;/script&gt;，則信用卡卡號為合法的，反之則是不合法的。
+以這組號碼為例 &lt;code class=&quot;highlighter-rouge&quot;&gt;5181 2710 9900 0012&lt;/code&gt;:&lt;/li&gt;
+  &lt;li&gt;把相對應的數字加倍後，放到另一個列表 (&lt;strong&gt;5&lt;/strong&gt;1&lt;strong&gt;8&lt;/strong&gt;1 &lt;strong&gt;2&lt;/strong&gt;7&lt;strong&gt;1&lt;/strong&gt;0  &lt;strong&gt;9&lt;/strong&gt;9&lt;strong&gt;0&lt;/strong&gt;0  &lt;strong&gt;0&lt;/strong&gt;0&lt;strong&gt;1&lt;/strong&gt;2)：&lt;script type=&quot;math/tex&quot;&gt;10&lt;/script&gt;、&lt;script type=&quot;math/tex&quot;&gt;16&lt;/script&gt;、&lt;script type=&quot;math/tex&quot;&gt;4&lt;/script&gt;、&lt;script type=&quot;math/tex&quot;&gt;2&lt;/script&gt;、&lt;script type=&quot;math/tex&quot;&gt;18&lt;/script&gt;、&lt;script type=&quot;math/tex&quot;&gt;0&lt;/script&gt;、&lt;script type=&quot;math/tex&quot;&gt;0&lt;/script&gt;、&lt;script type=&quot;math/tex&quot;&gt;2&lt;/script&gt;。&lt;/li&gt;
+  &lt;li&gt;把這些數的位元加起來得到：&lt;script type=&quot;math/tex&quot;&gt;(1 + 0) + (1 + 6) + 4 + 2 + (1 + 8) + 0 + 0 + 2 = 25&lt;/script&gt;。沒有對應到的位元合為 &lt;script type=&quot;math/tex&quot;&gt;1 + 1 + 7 + 0 + 9 + 0 + 0 + 2 = 20&lt;/script&gt;，所以最後的總和是 &lt;script type=&quot;math/tex&quot;&gt;20 + 25 = 45&lt;/script&gt;。&lt;/li&gt;
+  &lt;li&gt;&lt;script type=&quot;math/tex&quot;&gt;45&lt;/script&gt; 不是以 &lt;script type=&quot;math/tex&quot;&gt;0&lt;/script&gt; 結尾，故這組信用卡號並不合法。
+對於這個問題，你需要寫一個根據 Luhn 演算法的程式來確認輸入的信用卡號是否合法。&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;分析：&lt;/strong&gt;本題為簡單的模擬題。按照題目意思，將信用卡卡號的每一組的奇數位乘上 &lt;script type=&quot;math/tex&quot;&gt;2&lt;/script&gt; 倍並將結果的每一位數相加總，而偶數位則直接相加總，最後再將這兩個鄉加總的結果相加，若相加的結果可以為 &lt;script type=&quot;math/tex&quot;&gt;10&lt;/script&gt; 所整除，則信用卡卡號正確，反之錯誤。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+&lt;h2 id=&quot;input&quot;&gt;Input&lt;/h2&gt;
+
+&lt;p&gt;The input begins with a number &lt;script type=&quot;math/tex&quot;&gt;N&lt;/script&gt; on a single line, followed by &lt;script type=&quot;math/tex&quot;&gt;N&lt;/script&gt; lines each containing a single credit card number. Each credit card number consists of &lt;script type=&quot;math/tex&quot;&gt;16&lt;/script&gt; decimal digits in groups of four separated by single spaces.&lt;/p&gt;
+
+&lt;hr /&gt;
+&lt;h2 id=&quot;output&quot;&gt;Output&lt;/h2&gt;
+
+&lt;p&gt;The output consists of one line for each input credit card number. If the credit card number is valid, this line consists of the string “Valid”, otherwise it reads “Invalid”.&lt;/p&gt;
+
+&lt;hr /&gt;
+&lt;h2 id=&quot;sample-input&quot;&gt;Sample Input&lt;/h2&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;2
+5181 2710 9900 0012
+5181 2710 9900 0017
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;hr /&gt;
+&lt;h2 id=&quot;sample-output&quot;&gt;Sample Output&lt;/h2&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;Invalid
+Valid
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>UVA-299 - Train Swapping</title>
+   <link href="https://nckuacm.github.io//2018/04/06/UVA299/"/>
+   <updated>2018-04-07T02:00:00+08:00</updated>
+   <id>https://nckuacm.github.io//2018/04/06/UVA299</id>
+   <content type="html">&lt;blockquote&gt;
+  &lt;ul&gt;
+    &lt;li&gt;UVa Online Judge 解題結果請於 Submit 後，參閱 &lt;a href=&quot;https://uhunt.onlinejudge.org/&quot;&gt;uHunt&lt;/a&gt;。&lt;/li&gt;
+    &lt;li&gt;如果你有任何建議與指教，歡迎於下方留言一起討論喔！&lt;/li&gt;
+    &lt;li&gt;本題選為「20170926 大學程式能力檢定 CPE」題目。&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&quot;題意概要&quot;&gt;題意概要&lt;/h2&gt;
+
+&lt;p&gt;以前的火車站有一位工作人員稱作「車箱置換員」，他的工作是重新排列火車車箱。當每節車箱 (尤其是裝貨的車箱) 都經過適當的排列之後，火車司機在每個車站卸貨時只需從最後車箱一節一節依序放下即可。雖然在作 &lt;script type=&quot;math/tex&quot;&gt;180^{\circ}&lt;/script&gt; 的旋轉之後，車箱前後位置會相反，不過因為車箱被設計成可以前後移動，所以無所謂。現在鐵路公司需要寫一個程式來計算共需置換相鄰的車箱幾次才能使所有車箱依序排好。&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;分析：&lt;/strong&gt;本題違簡單的泡沫排序法 (bubble sort) 問題。在由小至大的排序過程中，若發生需要交換 (swap) 的情形時，則需要計次，並在最後印出需要交換的次數，即為本題所求。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+&lt;h2 id=&quot;input&quot;&gt;Input&lt;/h2&gt;
+
+&lt;p&gt;The input contains on the first line the number of test cases (&lt;script type=&quot;math/tex&quot;&gt;N&lt;/script&gt;). Each test case consists of two input lines. The first line of a test case contains an integer &lt;script type=&quot;math/tex&quot;&gt;L&lt;/script&gt;, determining the length of the train (&lt;script type=&quot;math/tex&quot;&gt;0 \le L \le 50&lt;/script&gt;). The second line of a test case contains a permutation of the numbers &lt;script type=&quot;math/tex&quot;&gt;1&lt;/script&gt; through &lt;script type=&quot;math/tex&quot;&gt;L&lt;/script&gt;, indicating the current order of the carriages. The carriages should be ordered such that carriage &lt;script type=&quot;math/tex&quot;&gt;1&lt;/script&gt; comes first, then &lt;script type=&quot;math/tex&quot;&gt;2&lt;/script&gt;, etc. with carriage &lt;script type=&quot;math/tex&quot;&gt;L&lt;/script&gt; coming last.&lt;/p&gt;
+
+&lt;hr /&gt;
+&lt;h2 id=&quot;output&quot;&gt;Output&lt;/h2&gt;
+
+&lt;p&gt;For each test case output the sentence: “Optimal train swapping takes &lt;script type=&quot;math/tex&quot;&gt;S&lt;/script&gt; swaps.” where &lt;script type=&quot;math/tex&quot;&gt;S&lt;/script&gt; is an integer.&lt;/p&gt;
+
+&lt;hr /&gt;
+&lt;h2 id=&quot;sample-input&quot;&gt;Sample Input&lt;/h2&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;3
+3
+1 3 2
+4
+4 3 2 1
+2
+2 1
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;hr /&gt;
+&lt;h2 id=&quot;sample-output&quot;&gt;Sample Output&lt;/h2&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;Optimal train swapping takes 1 swaps.
+Optimal train swapping takes 6 swaps.
+Optimal train swapping takes 1 swaps.
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>UVA-10142 - Australian Voting</title>
+   <link href="https://nckuacm.github.io//2018/04/05/UVA10142/"/>
+   <updated>2018-04-06T02:00:00+08:00</updated>
+   <id>https://nckuacm.github.io//2018/04/05/UVA10142</id>
+   <content type="html">&lt;blockquote&gt;
+  &lt;ul&gt;
+    &lt;li&gt;UVa Online Judge 解題結果請於 Submit 後，參閱 &lt;a href=&quot;https://uhunt.onlinejudge.org/&quot;&gt;uHunt&lt;/a&gt;。&lt;/li&gt;
+    &lt;li&gt;如果你有任何建議與指教，歡迎於下方留言一起討論喔！&lt;/li&gt;
+    &lt;li&gt;本題選為「20171219 大學程式能力檢定 CPE」題目。&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&quot;題意概要&quot;&gt;題意概要&lt;/h2&gt;
+
+&lt;p&gt;本題要模擬澳洲的投票制度。簡單來說，假設有 &lt;script type=&quot;math/tex&quot;&gt;n&lt;/script&gt; 位候選人和 &lt;script type=&quot;math/tex&quot;&gt;m&lt;/script&gt; 位公民，每一位公民對每位候選人有一個期望的優先序，在選舉過程中，先按照第一優先序分配選票，而得票最少的候選人的的票數，將剔除該輪選舉，並將按照投票人的優先序，重新分给剩下的候選人，直到有候選人得票數超過全體的 &lt;script type=&quot;math/tex&quot;&gt;50&lt;/script&gt;% 選票，則該候選人獲選，或是剩下的候選人的得票數相同時，視為一起獲選。&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;分析：&lt;/strong&gt;本題為模擬題，只要按照題目說明投票歸規則做篩選即可。在篩選過程中，需要先找到最多票數 (max) 和最少票數 (min) 的候選人，其目的在沒有候選選後票數過半的時候會用到，倘若在所有的候選人中，只要有「票數過半者」則直接獲選。若未有人過半，則要檢查大家的票數是否都相同 (換句話說，就是 &lt;code class=&quot;highlighter-rouge&quot;&gt;max == min ?&lt;/code&gt;)，若一樣的話，就視為平手，印出所有的候選人；若有不同的，則去掉票數最小的候選人，重新再計票。唯獨要注意的是，本題在存取票數的終止條件，是當遇到空行時，則輸入結束，建議使用 &lt;code class=&quot;highlighter-rouge&quot;&gt;#include &amp;lt;sstream&amp;gt;&lt;/code&gt; 先將每一行得票數存入 &lt;code class=&quot;highlighter-rouge&quot;&gt;string&lt;/code&gt; 型態的變數，再依間隔的空白，依序存給每個候選人。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+&lt;h2 id=&quot;input&quot;&gt;Input&lt;/h2&gt;
+
+&lt;p&gt;The input begins with a single positive integer on a line by itself indicating the number of the cases following, each of them as described below. This line is followed by a blank line, and there is also a blank line between two consecutive inputs. The first line of input is an integer &lt;script type=&quot;math/tex&quot;&gt;n \le 20&lt;/script&gt; indicating the number of candidates. The next &lt;script type=&quot;math/tex&quot;&gt;n&lt;/script&gt; lines consist of the names of the candidates in order. Names may be up to &lt;script type=&quot;math/tex&quot;&gt;80&lt;/script&gt; characters in length and may contain any printable characters. Up to &lt;script type=&quot;math/tex&quot;&gt;1,000&lt;/script&gt; lines follow; each contains the contents of a ballot. That is, each contains the numbers from &lt;script type=&quot;math/tex&quot;&gt;1&lt;/script&gt; to &lt;script type=&quot;math/tex&quot;&gt;n&lt;/script&gt; in some order. The first number indicates the candidate of first choice; the second number indicates candidate of second choice, and so on.&lt;/p&gt;
+
+&lt;hr /&gt;
+&lt;h2 id=&quot;output&quot;&gt;Output&lt;/h2&gt;
+
+&lt;p&gt;For each test case, the output must follow the description below. The outputs of two consecutive cases will be separated by a blank line. The Output consists of either a single line containing the name of the winner or several lines containing the names of the candidates who tied.&lt;/p&gt;
+
+&lt;hr /&gt;
+&lt;h2 id=&quot;sample-input&quot;&gt;Sample Input&lt;/h2&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;1
+3
+John Doe
+Jane Smith
+Sirhan Sirhan
+1 2 3
+2 1 3
+2 3 1
+1 2 3
+3 1 2
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;hr /&gt;
+&lt;h2 id=&quot;sample-output&quot;&gt;Sample Output&lt;/h2&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;John Doe
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>UVA-11233 - Deli Deli</title>
+   <link href="https://nckuacm.github.io//2018/04/04/UVA11233/"/>
+   <updated>2018-04-05T02:00:00+08:00</updated>
+   <id>https://nckuacm.github.io//2018/04/04/UVA11233</id>
+   <content type="html">&lt;blockquote&gt;
+  &lt;ul&gt;
+    &lt;li&gt;UVa Online Judge 解題結果請於 Submit 後，參閱 &lt;a href=&quot;https://uhunt.onlinejudge.org/&quot;&gt;uHunt&lt;/a&gt;。&lt;/li&gt;
+    &lt;li&gt;如果你有任何建議與指教，歡迎於下方留言一起討論喔！&lt;/li&gt;
+    &lt;li&gt;本題選為「20171219 大學程式能力檢定 CPE」題目。&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&quot;題意概要&quot;&gt;題意概要&lt;/h2&gt;
+
+&lt;p&gt;本題是將英文單字的複數型態變化做處理。英文單字的複數型態可以簡單列出以下規則：&lt;/p&gt;
+&lt;ol&gt;
+  &lt;li&gt;字尾的最後一個字母為「y」，且倒數第二個字母為子音，則複數型態要將「y」改為「ies」結尾。&lt;/li&gt;
+  &lt;li&gt;字尾的最後一個字母為「o」、「s」、「x」或是以「ch」和「sh」結尾的單字，則複數型態要加上「es」結尾。&lt;/li&gt;
+  &lt;li&gt;其餘單字直接加上「s」結尾即可。
+另外，有些英文單字的複數型態不是按照上述規則變化，則將要按照給定的形式去對應。本題希望你能將給定輸入的英文單字，輸出其複數型態。&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;分析：&lt;/strong&gt;本題為資料結構配合字串處理的題目，如果無法依循題目規則變化的，可以直接使用 &lt;code class=&quot;highlighter-rouge&quot;&gt;#include &amp;lt;map&amp;gt;&lt;/code&gt; 存在 map 中作對應，其他的英文單字就按照題目描述的規則處理。唯獨要注意的是，以「ch」和「sh」結尾的單字要注意本身字串的長度要超過 &lt;script type=&quot;math/tex&quot;&gt;1&lt;/script&gt;，另外變化後的字串結尾記得要補上 &lt;code class=&quot;highlighter-rouge&quot;&gt;\0&lt;/code&gt; 作為結束。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+&lt;h2 id=&quot;input&quot;&gt;Input&lt;/h2&gt;
+
+&lt;p&gt;The first line of the input consists of two integers &lt;script type=&quot;math/tex&quot;&gt;L&lt;/script&gt; and &lt;script type=&quot;math/tex&quot;&gt;N&lt;/script&gt; (&lt;script type=&quot;math/tex&quot;&gt;0 \le L \le 20&lt;/script&gt;, &lt;script type=&quot;math/tex&quot;&gt;1 \le N \le 100&lt;/script&gt;). The following &lt;script type=&quot;math/tex&quot;&gt;L&lt;/script&gt; lines contain the description of the irregular words and their plural form. Each line consists of two words separated by a space character, where the first word is the singular, the second word the plural form of some irregular word. After the list of irregular words, the following N lines contain one word each, which you have to make plural. You may assume that each word consists of at most &lt;script type=&quot;math/tex&quot;&gt;20&lt;/script&gt; lowercase letters from the english alphabet (“a” to “z”).&lt;/p&gt;
+
+&lt;hr /&gt;
+&lt;h2 id=&quot;output&quot;&gt;Output&lt;/h2&gt;
+
+&lt;p&gt;Print &lt;script type=&quot;math/tex&quot;&gt;N&lt;/script&gt; lines of output, where the i-th line is the plural form of the i-th input word.&lt;/p&gt;
+
+&lt;hr /&gt;
+&lt;h2 id=&quot;sample-input&quot;&gt;Sample Input&lt;/h2&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;3 7
+rice rice
+spaghetti spaghetti
+octopus octopi
+rice
+lobster
+spaghetti
+strawberry
+octopus
+peach
+turkey
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;hr /&gt;
+&lt;h2 id=&quot;sample-output&quot;&gt;Sample Output&lt;/h2&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;rice
+lobsters
+spaghetti
+strawberries
+octopi
+peaches
+turkeys
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>UVA-10071 - Back to High School Physics</title>
+   <link href="https://nckuacm.github.io//2018/04/03/UVA10071/"/>
+   <updated>2018-04-04T02:00:00+08:00</updated>
+   <id>https://nckuacm.github.io//2018/04/03/UVA10071</id>
+   <content type="html">&lt;blockquote&gt;
+  &lt;ul&gt;
+    &lt;li&gt;UVa Online Judge 解題結果請於 Submit 後，參閱 &lt;a href=&quot;https://uhunt.onlinejudge.org/&quot;&gt;uHunt&lt;/a&gt;。&lt;/li&gt;
+    &lt;li&gt;如果你有任何建議與指教，歡迎於下方留言一起討論喔！&lt;/li&gt;
+    &lt;li&gt;本題選為「20171219 大學程式能力檢定 CPE」題目。&lt;/li&gt;
+    &lt;li&gt;&lt;strong&gt;相同題目：&lt;/strong&gt;ZOJ-d226&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&quot;題意概要&quot;&gt;題意概要&lt;/h2&gt;
+
+&lt;p&gt;某一個粒子有一初速度和等加速度。假設在 &lt;script type=&quot;math/tex&quot;&gt;t&lt;/script&gt; 秒後此粒子的速度為 &lt;script type=&quot;math/tex&quot;&gt;v&lt;/script&gt; ，請問這個粒子在 &lt;script type=&quot;math/tex&quot;&gt;2t&lt;/script&gt; 秒後所經過的位移是多少。&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;分析：&lt;/strong&gt;本題為簡單的數論題型，由題意可以清楚知道所求為 &lt;script type=&quot;math/tex&quot;&gt;2t&lt;/script&gt; 時間過後的位移，所以直接將 &lt;script type=&quot;math/tex&quot;&gt;2t \times v&lt;/script&gt; 即為答案。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+&lt;h2 id=&quot;input&quot;&gt;Input&lt;/h2&gt;
+
+&lt;p&gt;The input will contain two integers in each line. Each line makes one set of input. These two integers denote the value of &lt;script type=&quot;math/tex&quot;&gt;v&lt;/script&gt; (&lt;script type=&quot;math/tex&quot;&gt;−100\le v \le 100&lt;/script&gt;) and &lt;script type=&quot;math/tex&quot;&gt;t&lt;/script&gt; (&lt;script type=&quot;math/tex&quot;&gt;0 \le t \le 200&lt;/script&gt;) (&lt;script type=&quot;math/tex&quot;&gt;t&lt;/script&gt; means at the time the particle gains that velocity)&lt;/p&gt;
+
+&lt;hr /&gt;
+&lt;h2 id=&quot;output&quot;&gt;Output&lt;/h2&gt;
+
+&lt;p&gt;For each line of input print a single integer in one line denoting the displacement in double of that time.&lt;/p&gt;
+
+&lt;hr /&gt;
+&lt;h2 id=&quot;sample-input&quot;&gt;Sample Input&lt;/h2&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;0 0
+5 12
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;hr /&gt;
+&lt;h2 id=&quot;sample-output&quot;&gt;Sample Output&lt;/h2&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;0
+120
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>UVA-10591 - Happy Number</title>
+   <link href="https://nckuacm.github.io//2018/04/02/UVA10591/"/>
+   <updated>2018-04-03T02:00:00+08:00</updated>
+   <id>https://nckuacm.github.io//2018/04/02/UVA10591</id>
+   <content type="html">&lt;blockquote&gt;
+  &lt;ul&gt;
+    &lt;li&gt;UVa Online Judge 解題結果請於 Submit 後，參閱 &lt;a href=&quot;https://uhunt.onlinejudge.org/&quot;&gt;uHunt&lt;/a&gt;。&lt;/li&gt;
+    &lt;li&gt;如果你有任何建議與指教，歡迎於下方留言一起討論喔！&lt;/li&gt;
+    &lt;li&gt;本題選為「20171219 大學程式能力檢定 CPE」題目。&lt;/li&gt;
+    &lt;li&gt;&lt;strong&gt;相同題目：&lt;/strong&gt;ZOJ-d442&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&quot;題意概要&quot;&gt;題意概要&lt;/h2&gt;
+
+&lt;p&gt;讓我們定義正整數 &lt;script type=&quot;math/tex&quot;&gt;S_0&lt;/script&gt; 中每個數字的平方和為 &lt;script type=&quot;math/tex&quot;&gt;S_1&lt;/script&gt;。以相同的方法我們定義 &lt;script type=&quot;math/tex&quot;&gt;S_1&lt;/script&gt; 中每個數字的平方和為 &lt;script type=&quot;math/tex&quot;&gt;S_2&lt;/script&gt;，並依此類推。假如有某個 &lt;script type=&quot;math/tex&quot;&gt;S_i = 1&lt;/script&gt; (&lt;script type=&quot;math/tex&quot;&gt;i \ge 1&lt;/script&gt;) 則我們說 &lt;script type=&quot;math/tex&quot;&gt;S_0&lt;/script&gt; 是一個 Happy number。如果某一個數不是 Happy number，那他就是一個 Unhappy number。例如：&lt;script type=&quot;math/tex&quot;&gt;7&lt;/script&gt; 是一個 Happy number，因為 &lt;script type=&quot;math/tex&quot;&gt;7&lt;/script&gt; → &lt;script type=&quot;math/tex&quot;&gt;49&lt;/script&gt; → &lt;script type=&quot;math/tex&quot;&gt;97&lt;/script&gt; → &lt;script type=&quot;math/tex&quot;&gt;130&lt;/script&gt; → &lt;script type=&quot;math/tex&quot;&gt;10&lt;/script&gt; → &lt;script type=&quot;math/tex&quot;&gt;1&lt;/script&gt;。但是 &lt;script type=&quot;math/tex&quot;&gt;4&lt;/script&gt; 是一個 Unhappy number，因為 &lt;script type=&quot;math/tex&quot;&gt;4&lt;/script&gt; → &lt;script type=&quot;math/tex&quot;&gt;16&lt;/script&gt; → &lt;script type=&quot;math/tex&quot;&gt;37&lt;/script&gt; → &lt;script type=&quot;math/tex&quot;&gt;58&lt;/script&gt; → &lt;script type=&quot;math/tex&quot;&gt;89&lt;/script&gt; → &lt;script type=&quot;math/tex&quot;&gt;145&lt;/script&gt; → &lt;script type=&quot;math/tex&quot;&gt;42&lt;/script&gt; → &lt;script type=&quot;math/tex&quot;&gt;20&lt;/script&gt; → &lt;script type=&quot;math/tex&quot;&gt;4&lt;/script&gt;，永遠也無法產生 &lt;script type=&quot;math/tex&quot;&gt;1&lt;/script&gt;。&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;分析：&lt;/strong&gt;本題為簡單的數論題型，由上述的例子 &lt;script type=&quot;math/tex&quot;&gt;4&lt;/script&gt; 會發現，&lt;script type=&quot;math/tex&quot;&gt;4&lt;/script&gt; 之所以不是 Happy number 是因為在迭代過程中出現重複的數字 &lt;script type=&quot;math/tex&quot;&gt;4&lt;/script&gt;，故之後的迭代就更不可能出現 &lt;script type=&quot;math/tex&quot;&gt;1&lt;/script&gt;，因此絕不可能是 Happy number。故本題的想法就是在每次迭代的過程中，檢查數字是否在之前的迭代中出現過，紀錄該次迭代的結果。提示，可以使用 &lt;code class=&quot;highlighter-rouge&quot;&gt;#include &amp;lt;set&amp;gt;&lt;/code&gt;。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+&lt;h2 id=&quot;input&quot;&gt;Input&lt;/h2&gt;
+
+&lt;p&gt;The input consists of several test cases, the number of which you are given in the first line of the input. Each test case consists of one line containing a single positive integer &lt;script type=&quot;math/tex&quot;&gt;N&lt;/script&gt; smaller than &lt;script type=&quot;math/tex&quot;&gt;109&lt;/script&gt;.&lt;/p&gt;
+
+&lt;hr /&gt;
+&lt;h2 id=&quot;output&quot;&gt;Output&lt;/h2&gt;
+
+&lt;p&gt;For each test case, you must print one of the following messages:&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;Case #p: N is a Happy number.
+Case #p: N is an Unhappy number.
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;Here &lt;script type=&quot;math/tex&quot;&gt;p&lt;/script&gt; stands for the case number (starting from &lt;script type=&quot;math/tex&quot;&gt;1&lt;/script&gt;). You should print the first message if the number &lt;script type=&quot;math/tex&quot;&gt;N&lt;/script&gt; is a happy number. Otherwise, print the second line.&lt;/p&gt;
+
+&lt;hr /&gt;
+&lt;h2 id=&quot;sample-input&quot;&gt;Sample Input&lt;/h2&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;3
+7
+4
+13
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;hr /&gt;
+&lt;h2 id=&quot;sample-output&quot;&gt;Sample Output&lt;/h2&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;Case #1: 7 is a Happy number.
+Case #2: 4 is an Unhappy number.
+Case #3: 13 is a Happy number.
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>UVA-1730 - Sum of MSLCM</title>
+   <link href="https://nckuacm.github.io//2018/04/01/UVA1730/"/>
+   <updated>2018-04-02T02:00:00+08:00</updated>
+   <id>https://nckuacm.github.io//2018/04/01/UVA1730</id>
+   <content type="html">&lt;blockquote&gt;
+  &lt;ul&gt;
+    &lt;li&gt;UVa Online Judge 解題結果請於 Submit 後，參閱 &lt;a href=&quot;https://uhunt.onlinejudge.org/&quot;&gt;uHunt&lt;/a&gt;。&lt;/li&gt;
+    &lt;li&gt;如果你有任何建議與指教，歡迎於下方留言一起討論喔！&lt;/li&gt;
+    &lt;li&gt;本題選為「20180327 大學程式能力檢定 CPE」題目。&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&quot;題意概要&quot;&gt;題意概要&lt;/h2&gt;
+
+&lt;p&gt;題目中定義一個數的所有因數 (包含本身和 &lt;script type=&quot;math/tex&quot;&gt;1&lt;/script&gt;) 的總和，為該數字的的 MLCM。本題希望給定一個數字 &lt;script type=&quot;math/tex&quot;&gt;N&lt;/script&gt;，其中 &lt;script type=&quot;math/tex&quot;&gt;% &lt;![CDATA[
+1 &lt; N &lt; 20,000,001 %]]&gt;&lt;/script&gt;，能夠求出從 &lt;script type=&quot;math/tex&quot;&gt;2&lt;/script&gt; 到 &lt;script type=&quot;math/tex&quot;&gt;N&lt;/script&gt; 的所有數字中的 MLCM 之總和。注意題目要求是從 &lt;script type=&quot;math/tex&quot;&gt;2&lt;/script&gt; 開始，故以下分析中會由 &lt;script type=&quot;math/tex&quot;&gt;1&lt;/script&gt; 開始討論，最後需要扣除 &lt;script type=&quot;math/tex&quot;&gt;1&lt;/script&gt;！&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;分析：&lt;/strong&gt;本題為數論題型，假設所求的 &lt;script type=&quot;math/tex&quot;&gt;N = 10&lt;/script&gt;，則將 &lt;script type=&quot;math/tex&quot;&gt;1&lt;/script&gt; - &lt;script type=&quot;math/tex&quot;&gt;10&lt;/script&gt; 每個數的因數列出來後，統計抹個因數出現的次數會發現，由小至大排序，&lt;script type=&quot;math/tex&quot;&gt;1&lt;/script&gt; 總共出現 &lt;script type=&quot;math/tex&quot;&gt;10&lt;/script&gt; 次、&lt;script type=&quot;math/tex&quot;&gt;2&lt;/script&gt; 總共出現 &lt;script type=&quot;math/tex&quot;&gt;5&lt;/script&gt; 次、&lt;script type=&quot;math/tex&quot;&gt;3&lt;/script&gt; 總共出現 &lt;script type=&quot;math/tex&quot;&gt;3&lt;/script&gt; 次、…等。仔細觀察會發現，每個因數出現的次數其實就是 &lt;script type=&quot;math/tex&quot;&gt;N / i&lt;/script&gt; (&lt;script type=&quot;math/tex&quot;&gt;i = 1, 2, ..., 10&lt;/script&gt;)，故直觀來說相當容易。但是，本題最關鍵的地方在於若按照上述的想法去運算，時間複雜度為 &lt;script type=&quot;math/tex&quot;&gt;O(N)&lt;/script&gt; 會超過題目的時間限制 (TLE)，因此本題在「求總和的地方不行逐一相加」。仔細觀察上述統計完的出現次數，會發現出現次數會「隨著因數變大而遞減」，而且連續因數之間的出線次數「可能會連續都一樣」，因此可以在求總和的過程中試著將「連續相同出現次數的因數一起相加」，此方法為「二分搜尋法」的概念，將上界與下界找出來，由梯形公式求總和。最後要注意的是，&lt;em&gt;本題最後要記得扣掉1&lt;/em&gt;，原因是上述的討論都是從 &lt;script type=&quot;math/tex&quot;&gt;1&lt;/script&gt; 開始，而題目要求適從 &lt;script type=&quot;math/tex&quot;&gt;2&lt;/script&gt; 開始求總和，故要扣除。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+&lt;h2 id=&quot;input&quot;&gt;Input&lt;/h2&gt;
+
+&lt;p&gt;Input file contains at most 200 lines. Each line contains a positive integer which denotes the value of &lt;script type=&quot;math/tex&quot;&gt;N&lt;/script&gt; (&lt;script type=&quot;math/tex&quot;&gt;% &lt;![CDATA[
+1 &lt; N &lt; 20,000,001 %]]&gt;&lt;/script&gt;). Input is terminated by a line containing a single zero, which should not be processed.&lt;/p&gt;
+
+&lt;hr /&gt;
+&lt;h2 id=&quot;output&quot;&gt;Output&lt;/h2&gt;
+
+&lt;p&gt;For each positive number N in the input, produce one line of output. This line contains an integer which denotes the value 
+&lt;script type=&quot;math/tex&quot;&gt;\sum_{ i = 2 }^{ N }{ \mathrm{ MSLCM }(i) }&lt;/script&gt;&lt;/p&gt;
+
+&lt;hr /&gt;
+&lt;h2 id=&quot;sample-input&quot;&gt;Sample Input&lt;/h2&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;10
+100
+0
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;hr /&gt;
+&lt;h2 id=&quot;sample-output&quot;&gt;Sample Output&lt;/h2&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;86
+823080
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>UVA-10004 - Bicoloring</title>
+   <link href="https://nckuacm.github.io//2018/03/31/UVA10004/"/>
+   <updated>2018-04-01T02:00:00+08:00</updated>
+   <id>https://nckuacm.github.io//2018/03/31/UVA10004</id>
+   <content type="html">&lt;blockquote&gt;
+  &lt;ul&gt;
+    &lt;li&gt;UVa Online Judge 解題結果請於 Submit 後，參閱 &lt;a href=&quot;https://uhunt.onlinejudge.org/&quot;&gt;uHunt&lt;/a&gt;。&lt;/li&gt;
+    &lt;li&gt;如果你有任何建議與指教，歡迎於下方留言一起討論喔！&lt;/li&gt;
+    &lt;li&gt;本題選為「20180327 大學程式能力檢定 CPE」題目。&lt;/li&gt;
+    &lt;li&gt;&lt;strong&gt;相同題目：&lt;/strong&gt;ZOJ-d768&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&quot;題意概要&quot;&gt;題意概要&lt;/h2&gt;
+
+&lt;p&gt;本題為「四色地圖理論 (Four Color Map Theorem)」。簡單來說，就是僅以四種顏色在地圖上不同的區域塗色，使得相鄰的區域顏色均不相同。題目將給你一個相連的圖，請你在節點上塗色 (只有 &lt;script type=&quot;math/tex&quot;&gt;2&lt;/script&gt; 種不同的顏色)，並且回答是否可以使得相鄰的節點顏色均不相同。為了使問題簡單一些，你可以假設：&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;沒有節點會有連向自己的邊。&lt;/li&gt;
+  &lt;li&gt;邊是沒有方向性的，也就是說如果節點 &lt;script type=&quot;math/tex&quot;&gt;A&lt;/script&gt; 可以連到節點 &lt;script type=&quot;math/tex&quot;&gt;B&lt;/script&gt;，那麼代表節點 &lt;script type=&quot;math/tex&quot;&gt;B&lt;/script&gt; 也可以連到節點 &lt;script type=&quot;math/tex&quot;&gt;A&lt;/script&gt;。&lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;圖形是強連通的，也就是說任兩節點之間皆有路徑相連。
+本題希望你求得「是否可以用 &lt;script type=&quot;math/tex&quot;&gt;2&lt;/script&gt; 種顏色塗節點使得相鄰的節點顏色均不相同」。&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;分析：&lt;/strong&gt;本題為簡單的 BFS 題目，可以透過 BFS 走遍所有的點，走過的點將它編號為 &lt;script type=&quot;math/tex&quot;&gt;1&lt;/script&gt; 或 &lt;script type=&quot;math/tex&quot;&gt;2&lt;/script&gt; (也就是將其塗為二種顏色)，如果下一個點還沒走過，就將它標上和現在這個點「不一樣的編號」(相鄰的顏色要不相同)，如果下一個已經走過，而編號「和現在這個點一樣」，回傳 false，表示不可能用兩種顏色塗節點使得相鄰的節點顏色均不相同，否則當 BFS 搜索完畢後，回傳 true。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+&lt;h2 id=&quot;input&quot;&gt;Input&lt;/h2&gt;
+
+&lt;p&gt;The input consists of several test cases. Each test case starts with a line containing the number &lt;script type=&quot;math/tex&quot;&gt;n&lt;/script&gt; (&lt;script type=&quot;math/tex&quot;&gt;% &lt;![CDATA[
+1 &lt; n &lt; 200 %]]&gt;&lt;/script&gt;) of different nodes. The second line contains the number of edges &lt;script type=&quot;math/tex&quot;&gt;l&lt;/script&gt;. After this, &lt;script type=&quot;math/tex&quot;&gt;l&lt;/script&gt; lines will follow, each containing two numbers that specify an edge between the two nodes that they represent. A node in the graph will be labeled using a number &lt;script type=&quot;math/tex&quot;&gt;a&lt;/script&gt; (&lt;script type=&quot;math/tex&quot;&gt;% &lt;![CDATA[
+0 \le a &lt; n %]]&gt;&lt;/script&gt;). An input with &lt;script type=&quot;math/tex&quot;&gt;n = 0&lt;/script&gt; will mark the end of the input and is not to be processed.&lt;/p&gt;
+
+&lt;hr /&gt;
+&lt;h2 id=&quot;output&quot;&gt;Output&lt;/h2&gt;
+
+&lt;p&gt;You have to decide whether the input graph can be bicolored or not, and print it as shown below.&lt;/p&gt;
+
+&lt;hr /&gt;
+&lt;h2 id=&quot;sample-input&quot;&gt;Sample Input&lt;/h2&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;3
+3
+0 1
+1 2
+2 0
+3
+2
+0 1
+1 2
+9
+8
+0 1
+0 2
+0 3
+0 4
+0 5
+0 6
+0 7
+0 8
+0
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;hr /&gt;
+&lt;h2 id=&quot;sample-output&quot;&gt;Sample Output&lt;/h2&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;NOT BICOLORABLE.
+BICOLORABLE.
+BICOLORABLE.
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>UVA-10642 - Can You Solve It?</title>
+   <link href="https://nckuacm.github.io//2018/03/30/UVA10642/"/>
+   <updated>2018-03-31T02:00:00+08:00</updated>
+   <id>https://nckuacm.github.io//2018/03/30/UVA10642</id>
+   <content type="html">&lt;blockquote&gt;
+  &lt;ul&gt;
+    &lt;li&gt;UVa Online Judge 解題結果請於 Submit 後，參閱 &lt;a href=&quot;https://uhunt.onlinejudge.org/&quot;&gt;uHunt&lt;/a&gt;。&lt;/li&gt;
+    &lt;li&gt;如果你有任何建議與指教，歡迎於下方留言一起討論喔！&lt;/li&gt;
+    &lt;li&gt;&lt;strong&gt;相同題目：&lt;/strong&gt;NCTU-23821&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&quot;題意概要&quot;&gt;題意概要&lt;/h2&gt;
+
+&lt;p&gt;請參考下圖的二維座標系統 (笛卡兒座標系)，垂直為 &lt;script type=&quot;math/tex&quot;&gt;X&lt;/script&gt; 軸，水平為 &lt;script type=&quot;math/tex&quot;&gt;Y&lt;/script&gt; 軸，每個圓點有一個座標。在座標系統上可以隨著箭頭所表示之路徑，從座標上的一圓點出發移動到另一圓點，所經過之路徑的距離定義為：經過的座標點數加 &lt;script type=&quot;math/tex&quot;&gt;1&lt;/script&gt;，例如從 &lt;script type=&quot;math/tex&quot;&gt;(0, 3)&lt;/script&gt; 到 &lt;script type=&quot;math/tex&quot;&gt;(3, 0)&lt;/script&gt; 必須先經過 &lt;script type=&quot;math/tex&quot;&gt;(1, 2)&lt;/script&gt; 與 &lt;script type=&quot;math/tex&quot;&gt;(2, 1)&lt;/script&gt; 兩點，所以距離等於 &lt;script type=&quot;math/tex&quot;&gt;2 + 1 = 3&lt;/script&gt; 。本題會給定兩個座標點，請你計算從出發點到目的點的距離，你可以假設不能用箭頭的反方向回頭。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://gpe3.acm-icpc.tw/pct/images/8870d5bbbdbbe4e90619a25a1f112e27.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;分析：&lt;/strong&gt;簡單來說，本題要找出兩點需要經過多少點可以到達，點到點走的方式請參考原題目的圖。因此，可以先計算出 &lt;script type=&quot;math/tex&quot;&gt;(0, 0)&lt;/script&gt; 到第一個點的距離 (&lt;script type=&quot;math/tex&quot;&gt;s_1&lt;/script&gt;)，在計算 &lt;script type=&quot;math/tex&quot;&gt;(0, 0)&lt;/script&gt; 到第二點的距離 (&lt;script type=&quot;math/tex&quot;&gt;s_2&lt;/script&gt;)，而 &lt;script type=&quot;math/tex&quot;&gt;s_2 - s_1&lt;/script&gt; 即是答案。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+&lt;h2 id=&quot;input&quot;&gt;Input&lt;/h2&gt;
+
+&lt;p&gt;The first line in the input is the number of test cases n (0 &amp;lt; n &lt;script type=&quot;math/tex&quot;&gt;\le&lt;/script&gt; 500) to handle. Following there are n lines each containing four integers (0 ≤ each_integer &lt;script type=&quot;math/tex&quot;&gt;\le&lt;/script&gt; 100,000) the first pair of which represents the coordinates of the source circle and the other represents that of the destination circle. The coordinates are listed in a form &lt;script type=&quot;math/tex&quot;&gt;(x, y)&lt;/script&gt;.&lt;/p&gt;
+
+&lt;hr /&gt;
+&lt;h2 id=&quot;output&quot;&gt;Output&lt;/h2&gt;
+
+&lt;p&gt;For each pair of integers your program should output the case number first and then the number of step(s) to reach the destination from the source. You may assume that it is always possible to reach the destination circle from the source circle.&lt;/p&gt;
+
+&lt;hr /&gt;
+&lt;h2 id=&quot;sample-input&quot;&gt;Sample Input&lt;/h2&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;3
+0 0 0 1
+0 0 1 0
+0 0 0 2
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;hr /&gt;
+&lt;h2 id=&quot;sample-output&quot;&gt;Sample Output&lt;/h2&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;Case 1: 1
+Case 2: 2
+Case 3: 3
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>UVA-118 - Mutant Flatworld Explorers</title>
+   <link href="https://nckuacm.github.io//2018/03/29/UVA118/"/>
+   <updated>2018-03-30T02:00:00+08:00</updated>
+   <id>https://nckuacm.github.io//2018/03/29/UVA118</id>
+   <content type="html">&lt;blockquote&gt;
+  &lt;ul&gt;
+    &lt;li&gt;UVa Online Judge 解題結果請於 Submit 後，參閱 &lt;a href=&quot;https://uhunt.onlinejudge.org/&quot;&gt;uHunt&lt;/a&gt;。&lt;/li&gt;
+    &lt;li&gt;如果你有任何建議與指教，歡迎於下方留言一起討論喔！&lt;/li&gt;
+    &lt;li&gt;本題選為「20180327 大學程式能力檢定 CPE」題目。&lt;/li&gt;
+    &lt;li&gt;&lt;strong&gt;相同題目：&lt;/strong&gt;ZOJ-c082&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&quot;題意概要&quot;&gt;題意概要&lt;/h2&gt;
+
+&lt;p&gt;在一個 &lt;script type=&quot;math/tex&quot;&gt;n \times m&lt;/script&gt; 的棋盤上，有許多的機器人，每一個機器人會依序給定「起始座標」與「面朝方向」，並給定一串移動的指令 (包含：向右轉向、向左轉向、向前移動)，希望求得在這一串指令過後，該機器人的座標與面朝方向。在機器人移動的過程中，若機器人移動至邊界外，則會掉落棋盤外，並且註記發生掉落前的座標與面朝方向，並且之後的其他機器人都不能走到該座標。&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;分析：&lt;/strong&gt;本題為簡單的實作題，唯獨要注意是，當前進的下一步被擋住時，則跳過前進的這一步，之後的其他指令仍要進行，直到指令結束或是掉出棋盤外。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+&lt;h2 id=&quot;input&quot;&gt;Input&lt;/h2&gt;
+
+&lt;p&gt;The first line of input is the upper-right coordinates of the rectangular world, the lower-left coordinates are assumed to be &lt;script type=&quot;math/tex&quot;&gt;(0, 0)&lt;/script&gt;.
+The remaining input consists of a sequence of robot positions and instructions (two lines per robot).
+A position consists of two integers specifying the initial coordinates of the robot and an orientation (N, S, E, W), all separated by white space on one line. A robot instruction is a string of the letters “L”, “R”, and “F” on one line.
+Each robot is processed sequentially, i.e., finishes executing the robot instructions before the next robot begins execution.
+Input is terminated by end-of-file.
+You may assume that all initial robot positions are within the bounds of the specified grid. The maximum value for any coordinate is 50. All instruction strings will be less than 100 characters in length.&lt;/p&gt;
+
+&lt;hr /&gt;
+&lt;h2 id=&quot;output&quot;&gt;Output&lt;/h2&gt;
+
+&lt;p&gt;For each robot position/instruction in the input, the output should indicate the final grid position and orientation of the robot. If a robot falls off the edge of the grid the word ‘LOST’ should be printed after the position and orientation.&lt;/p&gt;
+
+&lt;hr /&gt;
+&lt;h2 id=&quot;sample-input&quot;&gt;Sample Input&lt;/h2&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;5 3
+1 1 E
+RFRFRFRF
+3 2 N
+FRRFLLFFRRFLL
+0 3 W
+LLFFFLFLFL
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;hr /&gt;
+&lt;h2 id=&quot;sample-output&quot;&gt;Sample Output&lt;/h2&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;1 1 E
+3 3 N LOST
+2 3 S
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>UVA-10633 - Rare Easy Problem</title>
+   <link href="https://nckuacm.github.io//2018/03/28/UVA10633/"/>
+   <updated>2018-03-29T02:00:00+08:00</updated>
+   <id>https://nckuacm.github.io//2018/03/28/UVA10633</id>
+   <content type="html">&lt;blockquote&gt;
+  &lt;ul&gt;
+    &lt;li&gt;UVa Online Judge 解題結果請於 Submit 後，參閱 &lt;a href=&quot;https://uhunt.onlinejudge.org/&quot;&gt;uHunt&lt;/a&gt;。&lt;/li&gt;
+    &lt;li&gt;如果你有任何建議與指教，歡迎於下方留言一起討論喔！&lt;/li&gt;
+    &lt;li&gt;本題選為「20180327 大學程式能力檢定 CPE」題目。&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&quot;題意概要&quot;&gt;題意概要&lt;/h2&gt;
+
+&lt;p&gt;假設有一個整數 &lt;script type=&quot;math/tex&quot;&gt;N&lt;/script&gt;，將 &lt;script type=&quot;math/tex&quot;&gt;N&lt;/script&gt; 去掉個位數字後所形成的數字 &lt;script type=&quot;math/tex&quot;&gt;M&lt;/script&gt;，題目目前已知 &lt;script type=&quot;math/tex&quot;&gt;N - M&lt;/script&gt;，反求出可能的 &lt;script type=&quot;math/tex&quot;&gt;N&lt;/script&gt; 為多少 (&lt;script type=&quot;math/tex&quot;&gt;N&lt;/script&gt; 可能有兩組解，輸出須按照由小到大的方式)。&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;分析：&lt;/strong&gt;本題為簡單的數論題，&lt;script type=&quot;math/tex&quot;&gt;N = 10 \times a + b&lt;/script&gt;，其中 &lt;script type=&quot;math/tex&quot;&gt;0 \le b \le 9&lt;/script&gt;，則 &lt;script type=&quot;math/tex&quot;&gt;M = a&lt;/script&gt;。故可以得到 &lt;script type=&quot;math/tex&quot;&gt;N - M = N - a = 9 \times a + b&lt;/script&gt;，因此只需要枚舉所有的 &lt;script type=&quot;math/tex&quot;&gt;b&lt;/script&gt; (&lt;script type=&quot;math/tex&quot;&gt;0 \le b \le 9&lt;/script&gt;) 計算出滿足條件的 N 即為所求。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+&lt;h2 id=&quot;input&quot;&gt;Input&lt;/h2&gt;
+
+&lt;p&gt;Input consists of multiple lines, one line per case. Each line contains a single positive integer between &lt;script type=&quot;math/tex&quot;&gt;10&lt;/script&gt; and &lt;script type=&quot;math/tex&quot;&gt;1018&lt;/script&gt; inclusive, giving the value of &lt;script type=&quot;math/tex&quot;&gt;N − M&lt;/script&gt;. Input is terminated by a line containing “0”.&lt;/p&gt;
+
+&lt;hr /&gt;
+&lt;h2 id=&quot;output&quot;&gt;Output&lt;/h2&gt;
+
+&lt;p&gt;For each case, print one line containing the possible values of &lt;script type=&quot;math/tex&quot;&gt;N&lt;/script&gt; in sorted order. Separate consecutive numbers with a single space.&lt;/p&gt;
+
+&lt;hr /&gt;
+&lt;h2 id=&quot;sample-input&quot;&gt;Sample Input&lt;/h2&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;18
+0
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;hr /&gt;
+&lt;h2 id=&quot;sample-output&quot;&gt;Sample Output&lt;/h2&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;19 20
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>UVA-488 - Triangle Wave</title>
+   <link href="https://nckuacm.github.io//2018/03/27/UVA488/"/>
+   <updated>2018-03-28T02:00:00+08:00</updated>
+   <id>https://nckuacm.github.io//2018/03/27/UVA488</id>
+   <content type="html">&lt;blockquote&gt;
+  &lt;ul&gt;
+    &lt;li&gt;UVa Online Judge 解題結果請於 Submit 後，參閱 &lt;a href=&quot;https://uhunt.onlinejudge.org/&quot;&gt;uHunt&lt;/a&gt;。&lt;/li&gt;
+    &lt;li&gt;如果你有任何建議與指教，歡迎於下方留言一起討論喔！&lt;/li&gt;
+    &lt;li&gt;本題選為「20180327 大學程式能力檢定 CPE」題目。&lt;/li&gt;
+    &lt;li&gt;&lt;strong&gt;相同題目：&lt;/strong&gt; ZOJ-c013&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&quot;題意概要&quot;&gt;題意概要&lt;/h2&gt;
+
+&lt;p&gt;本題將給定「振幅」與「頻率」，由給定的振幅與頻率，輸出對應的波形。&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;分析：&lt;/strong&gt;本題為簡單的迴圈輸出，唯獨要注意的就是換行符號。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+&lt;h2 id=&quot;input&quot;&gt;Input&lt;/h2&gt;
+
+&lt;p&gt;The input begins with a single positive integer on a line by itself indicating the number of the cases following, each of them as described below. This line is followed by a blank line, and there is also a blank line between two consecutive inputs. Each input set will contain two positive integers, each on a separate line. The first integer is the Amplitude; the second integer is the Frequency.&lt;/p&gt;
+
+&lt;hr /&gt;
+&lt;h2 id=&quot;output&quot;&gt;Output&lt;/h2&gt;
+
+&lt;p&gt;For each test case, the output must follow the description below. The outputs of two consecutive cases will be separated by a blank line. For the output of your program, you will be printing wave forms each separated by a blank line. The total number of wave forms equals the Frequency, and the horizontal “height” of each wave equals the Amplitude. The Amplitude will never be greater than nine. The waveform itself should be filled with integers on each line which indicate the “height” of that line.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;NOTE:&lt;/strong&gt; There is a blank line after each separate waveform, excluding the last one.&lt;/p&gt;
+
+&lt;hr /&gt;
+&lt;h2 id=&quot;sample-input&quot;&gt;Sample Input&lt;/h2&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;1
+
+3
+2
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;hr /&gt;
+&lt;h2 id=&quot;sample-output&quot;&gt;Sample Output&lt;/h2&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;1
+22
+333
+22
+1
+
+1
+22
+333
+22
+1
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>UVA-10026 - Shoemaker’s problem</title>
+   <link href="https://nckuacm.github.io//2018/03/26/UVA10026/"/>
+   <updated>2018-03-27T02:00:00+08:00</updated>
+   <id>https://nckuacm.github.io//2018/03/26/UVA10026</id>
+   <content type="html">&lt;blockquote&gt;
+  &lt;ul&gt;
+    &lt;li&gt;UVa Online Judge 解題結果請於 Submit 後，參閱 &lt;a href=&quot;https://uhunt.onlinejudge.org/&quot;&gt;uHunt&lt;/a&gt;。&lt;/li&gt;
+    &lt;li&gt;如果你有任何建議與指教，歡迎於下方留言一起討論喔！&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&quot;題意概要&quot;&gt;題意概要&lt;/h2&gt;
+
+&lt;p&gt;鞋匠一次只能選一個工作做，以 Sample Input 為例，如果先選第一件工作，則需要完成的時間為 &lt;script type=&quot;math/tex&quot;&gt;3&lt;/script&gt; 天，而這 &lt;script type=&quot;math/tex&quot;&gt;3&lt;/script&gt; 天也就無法做其他工作，因此對於其他工作而言，就要負擔罰金 &lt;script type=&quot;math/tex&quot;&gt;3 \times (1000 + 2 + 5)&lt;/script&gt; 元，故本題需要找出「罰金最小」的工作的次序。&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;分析：&lt;/strong&gt;本題為排序問題，而在排序的過程中，需要考量相鄰兩事件 a (&lt;script type=&quot;math/tex&quot;&gt;T_a&lt;/script&gt;, &lt;script type=&quot;math/tex&quot;&gt;F_a&lt;/script&gt;) 與 b (&lt;script type=&quot;math/tex&quot;&gt;T_b&lt;/script&gt;, &lt;script type=&quot;math/tex&quot;&gt;B_b&lt;/script&gt;) 無論排序為 ab 或是 ba，其他除了 a 與 b 以外的事件之罰金是固定的，唯獨差別在於 ab (&lt;script type=&quot;math/tex&quot;&gt;T_a \times F_b&lt;/script&gt;) 或是 ba (&lt;script type=&quot;math/tex&quot;&gt;T_b \times F_a&lt;/script&gt;) 的損失較小。若 ab 的損失較小，則 &lt;script type=&quot;math/tex&quot;&gt;% &lt;![CDATA[
+(T_a \times F_b) &lt; (T_b \times F_a) %]]&gt;&lt;/script&gt;，換句話說，每單位時間的罰金比例為 &lt;script type=&quot;math/tex&quot;&gt;(F_a / T_a) &gt; (F_b / T_b)&lt;/script&gt;，故事件 a 的 (罰金 / 時間) 比較大。因此，本題只需將每個工作的「單位時間的罰金比例」 &lt;script type=&quot;math/tex&quot;&gt;(F_i / T_i)&lt;/script&gt; 求出後，由大到小排序即可。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+&lt;h2 id=&quot;input&quot;&gt;Input&lt;/h2&gt;
+
+&lt;p&gt;The input begins with a single positive integer on a line by itself indicating the number of the cases following, each of them as described below. This line is followed by a blank line, and there is also a blank line between two consecutive inputs. First line of input contains an integer N (1 ≤ N ≤ 1000). The next N lines each contain two numbers: the time and fine of each task in order.&lt;/p&gt;
+
+&lt;hr /&gt;
+&lt;h2 id=&quot;output&quot;&gt;Output&lt;/h2&gt;
+
+&lt;p&gt;For each test case, the output must follow the description below. The outputs of two consecutive cases will be separated by a blank line. You programm should print the sequence of jobs with minimal fine. Each job should be represented by its number in input. All integers should be placed on only one output line and separated by one space. If multiple solutions are possible, print the first lexicographically.&lt;/p&gt;
+
+&lt;hr /&gt;
+&lt;h2 id=&quot;sample-input&quot;&gt;Sample Input&lt;/h2&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;1
+4
+3 4
+1 1000
+2 2
+5 5
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;hr /&gt;
+&lt;h2 id=&quot;sample-output&quot;&gt;Sample Output&lt;/h2&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;2 1 3 4
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>UVA-11727 - Cost Cutting</title>
+   <link href="https://nckuacm.github.io//2018/03/25/UVA11727/"/>
+   <updated>2018-03-26T02:00:00+08:00</updated>
+   <id>https://nckuacm.github.io//2018/03/25/UVA11727</id>
+   <content type="html">&lt;blockquote&gt;
+  &lt;ul&gt;
+    &lt;li&gt;UVa Online Judge 解題結果請於 Submit 後，參閱 &lt;a href=&quot;https://uhunt.onlinejudge.org/&quot;&gt;uHunt&lt;/a&gt;。&lt;/li&gt;
+    &lt;li&gt;如果你有任何建議與指教，歡迎於下方留言一起討論喔！&lt;/li&gt;
+    &lt;li&gt;&lt;strong&gt;相同題目：&lt;/strong&gt;ZOJ-d659&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&quot;題意概要&quot;&gt;題意概要&lt;/h2&gt;
+
+&lt;p&gt;簡單來說，XYZ 公司為了要節省成本，假設現在有 &lt;script type=&quot;math/tex&quot;&gt;3&lt;/script&gt; 位員工，而現在公司要裁掉其中 &lt;script type=&quot;math/tex&quot;&gt;2&lt;/script&gt; 個。裁決得方式是裁掉拿最多薪水以及拿最少薪水的兩人，現在給你 &lt;script type=&quot;math/tex&quot;&gt;3&lt;/script&gt; 位員工的薪水，請你找出誰不會被裁員。&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;分析：&lt;/strong&gt;本題相當簡單，只需要按照題目意思找到「中間值」即可。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+&lt;h2 id=&quot;input&quot;&gt;Input&lt;/h2&gt;
+
+&lt;p&gt;The first line of input is an integer &lt;script type=&quot;math/tex&quot;&gt;T&lt;/script&gt; (&lt;script type=&quot;math/tex&quot;&gt;% &lt;![CDATA[
+T &lt; 20 %]]&gt;&lt;/script&gt;) that indicates the number of test cases. Each case consists of a line with &lt;script type=&quot;math/tex&quot;&gt;3&lt;/script&gt; distinct positive integers. These &lt;script type=&quot;math/tex&quot;&gt;3&lt;/script&gt; integers represent the salaries of the three employees. All these integers will be in the range &lt;script type=&quot;math/tex&quot;&gt;[1,000, 10,000]&lt;/script&gt;.&lt;/p&gt;
+
+&lt;hr /&gt;
+&lt;h2 id=&quot;output&quot;&gt;Output&lt;/h2&gt;
+
+&lt;p&gt;For each case, output the case number followed by the salary of the person who survives.&lt;/p&gt;
+
+&lt;hr /&gt;
+&lt;h2 id=&quot;sample-input&quot;&gt;Sample Input&lt;/h2&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;3
+1000 2000 3000
+3000 2500 1500
+1500 1200 1800
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;hr /&gt;
+&lt;h2 id=&quot;sample-output&quot;&gt;Sample Output&lt;/h2&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;Case 1: 2000
+Case 2: 2500
+Case 3: 1500
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>UVA-10420 - List of Conquests</title>
+   <link href="https://nckuacm.github.io//2018/03/24/UVA10420/"/>
+   <updated>2018-03-25T02:00:00+08:00</updated>
+   <id>https://nckuacm.github.io//2018/03/24/UVA10420</id>
+   <content type="html">&lt;blockquote&gt;
+  &lt;ul&gt;
+    &lt;li&gt;UVa Online Judge 解題結果請於 Submit 後，參閱 &lt;a href=&quot;https://uhunt.onlinejudge.org/&quot;&gt;uHunt&lt;/a&gt;。&lt;/li&gt;
+    &lt;li&gt;如果你有任何建議與指教，歡迎於下方留言一起討論喔！&lt;/li&gt;
+    &lt;li&gt;&lt;strong&gt;相同題目：&lt;/strong&gt;ZOJ-a743&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&quot;題意概要&quot;&gt;題意概要&lt;/h2&gt;
+
+&lt;p&gt;在「唐．喬凡尼」歌劇第一幕中，僕人雷波雷諾 (Leporello) 拿著一本小冊子告訴唐納．愛爾維拉 (Donna Elvira) 有關他的主人的風流事蹟：「這本小冊子記錄著每位與我的主人交往過的女子芳名，你瞧瞧，在義大利有 &lt;script type=&quot;math/tex&quot;&gt;640&lt;/script&gt; 位，在德國有 &lt;script type=&quot;math/tex&quot;&gt;231&lt;/script&gt; 位，法國 &lt;script type=&quot;math/tex&quot;&gt;100&lt;/script&gt; 位，&lt;script type=&quot;math/tex&quot;&gt;91&lt;/script&gt; 位在土耳其，在西班牙甚至超過 &lt;script type=&quot;math/tex&quot;&gt;1,000&lt;/script&gt; 位，各國、各年齡層、各社會階層的婦女都有。」這本冊子上的人名是以時間順序來記錄，每次雷波雷諾要告訴別人他主人的作風時都很麻煩，因為以國別來分類時都必須重新算一遍。你必須寫程式幫助他做計算。&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;分析：&lt;/strong&gt;簡單來說，本題就是要找每個國家重複的個數，並按照字典順序印出答案。因此，只需要「存取國家名稱」，按「首字字母順序排序」，最後「找出重複的數量」。要注意的是，女生名字並沒有規定字數，但是若只有兩個字的話會 WA。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+&lt;h2 id=&quot;input&quot;&gt;Input&lt;/h2&gt;
+
+&lt;p&gt;The input consists of at most 2000 lines. The first line contains a number n, indicating that there will be n more lines. Each following line, with at most 75 characters, contains a country (the first word) and the name of a woman (the rest of the words in the line) Giovanni loved. You may assume that the name of all countries consist of only one word.&lt;/p&gt;
+
+&lt;hr /&gt;
+&lt;h2 id=&quot;output&quot;&gt;Output&lt;/h2&gt;
+
+&lt;p&gt;The output consists of lines in alphabetical order. Each line starts with the name of a country, followed by the total number of women Giovanni loved in that country, separated by a space.&lt;/p&gt;
+
+&lt;hr /&gt;
+&lt;h2 id=&quot;sample-input&quot;&gt;Sample Input&lt;/h2&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;3
+Spain Donna Elvira
+England Jane Doe
+Spain Donna Anna
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;hr /&gt;
+&lt;h2 id=&quot;sample-output&quot;&gt;Sample Output&lt;/h2&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;England 1
+Spain 2
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+</content>
+ </entry>
+ 
+
+</feed>
