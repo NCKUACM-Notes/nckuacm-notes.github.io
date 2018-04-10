@@ -15,18 +15,18 @@
     font-weight: bold;
 }
 .theme-base-chocolate .sidebar a:hover {
-    color: #FDBBBB;
+    color: #2a363b;
     text-decoration: none;
 }
 .theme-base-chocolate .sidebar-nav a.active {
     text-decoration: none;
 }
 .theme-base-chocolate .sidebar h1 a {
-    color: #ffffff;
+    color: #ac4142;
     font-size: 2.25rem;
 }
 .theme-base-chocolate .sidebar h1 a:hover {
-    color: #ffffff;
+    color: #ac4142;
     text-decoration: none;
 }
 .theme-base-chocolate .sidebar-nav {
