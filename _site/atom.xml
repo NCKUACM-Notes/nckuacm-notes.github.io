@@ -4,7 +4,7 @@
  <title>NCKU ACM</title>
  <link href="https://nckuacm-notes.github.io//atom.xml" rel="self"/>
  <link href="https://nckuacm-notes.github.io//"/>
- <updated>2018-04-11T22:39:53+08:00</updated>
+ <updated>2018-04-11T22:41:24+08:00</updated>
  <id>https://nckuacm-notes.github.io/</id>
  <author>
    <name></name>
@@ -13,7 +13,7 @@
 
  
  <entry>
-   <title>UVA-1225 - Coin Collector</title>
+   <title>UVA-1225 - Digit Counting</title>
    <link href="https://nckuacm-notes.github.io//2018/04/10/UVA1225/"/>
    <updated>2018-04-11T02:00:00+08:00</updated>
    <id>https://nckuacm-notes.github.io//2018/04/10/UVA1225</id>
