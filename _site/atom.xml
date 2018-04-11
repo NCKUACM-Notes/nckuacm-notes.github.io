@@ -1,16 +1,95 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
- <title>NCKU ACM Notes</title>
+ <title>NCKU ACM</title>
  <link href="https://nckuacm-notes.github.io//atom.xml" rel="self"/>
  <link href="https://nckuacm-notes.github.io//"/>
- <updated>2018-04-11T02:15:42+08:00</updated>
+ <updated>2018-04-11T22:39:53+08:00</updated>
  <id>https://nckuacm-notes.github.io/</id>
  <author>
    <name></name>
    <email></email>
  </author>
 
+ 
+ <entry>
+   <title>UVA-1225 - Coin Collector</title>
+   <link href="https://nckuacm-notes.github.io//2018/04/10/UVA1225/"/>
+   <updated>2018-04-11T02:00:00+08:00</updated>
+   <id>https://nckuacm-notes.github.io//2018/04/10/UVA1225</id>
+   <content type="html">&lt;blockquote&gt;
+  &lt;ul&gt;
+    &lt;li&gt;UVa Online Judge 解題結果請於 Submit 後，參閱 &lt;a href=&quot;https://uhunt.onlinejudge.org/&quot;&gt;uHunt&lt;/a&gt;。&lt;/li&gt;
+    &lt;li&gt;如果你有任何建議與指教，歡迎於下方留言一起討論喔！&lt;/li&gt;
+    &lt;li&gt;本題選為「20170523 大學程式能力檢定 CPE」題目。&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&quot;題意概要&quot;&gt;題意概要&lt;/h2&gt;
+
+&lt;p&gt;簡單來說，假設給定 &lt;script type=&quot;math/tex&quot;&gt;N = 13&lt;/script&gt;，則會將 &lt;script type=&quot;math/tex&quot;&gt;1&lt;/script&gt; ~ &lt;script type=&quot;math/tex&quot;&gt;13&lt;/script&gt; 串接起來，形成一個數字 &lt;script type=&quot;math/tex&quot;&gt;12345678910111213&lt;/script&gt;，題目希望求得在這個數字中 &lt;script type=&quot;math/tex&quot;&gt;0&lt;/script&gt; ~ &lt;script type=&quot;math/tex&quot;&gt;9&lt;/script&gt; 個別出現的次數。以上述 &lt;script type=&quot;math/tex&quot;&gt;N = 13&lt;/script&gt; 為例：&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;要統計的數字&lt;/td&gt;
+      &lt;td&gt;0&lt;/td&gt;
+      &lt;td&gt;1&lt;/td&gt;
+      &lt;td&gt;2&lt;/td&gt;
+      &lt;td&gt;3&lt;/td&gt;
+      &lt;td&gt;4&lt;/td&gt;
+      &lt;td&gt;5&lt;/td&gt;
+      &lt;td&gt;6&lt;/td&gt;
+      &lt;td&gt;7&lt;/td&gt;
+      &lt;td&gt;8&lt;/td&gt;
+      &lt;td&gt;9&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;出現次數&lt;/td&gt;
+      &lt;td&gt;1&lt;/td&gt;
+      &lt;td&gt;6&lt;/td&gt;
+      &lt;td&gt;2&lt;/td&gt;
+      &lt;td&gt;2&lt;/td&gt;
+      &lt;td&gt;1&lt;/td&gt;
+      &lt;td&gt;1&lt;/td&gt;
+      &lt;td&gt;1&lt;/td&gt;
+      &lt;td&gt;1&lt;/td&gt;
+      &lt;td&gt;1&lt;/td&gt;
+      &lt;td&gt;1&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;分析：&lt;/strong&gt;本題為數學題，按照題目給的 &lt;script type=&quot;math/tex&quot;&gt;N&lt;/script&gt;，可以逐一從 &lt;script type=&quot;math/tex&quot;&gt;1&lt;/script&gt; 開始到 &lt;script type=&quot;math/tex&quot;&gt;N&lt;/script&gt; 的每一個數字中，每一位數的出現數字做統計即可。注意最後輸出的格式，最後一個印出的數字之後不可以有空格。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+&lt;h2 id=&quot;input&quot;&gt;Input&lt;/h2&gt;
+
+&lt;p&gt;The input file consists of several data sets. The first line of the input file contains the number of data sets which is a positive integer and is not bigger than 20. The following lines describe the data sets. For each test case, there is one single line containing the number &lt;script type=&quot;math/tex&quot;&gt;N&lt;/script&gt;.&lt;/p&gt;
+
+&lt;hr /&gt;
+&lt;h2 id=&quot;output&quot;&gt;Output&lt;/h2&gt;
+
+&lt;p&gt;For each test case, write sequentially in one line the number of digit 0, 1, …, 9 separated by a space.&lt;/p&gt;
+
+&lt;hr /&gt;
+&lt;h2 id=&quot;sample-input&quot;&gt;Sample Input&lt;/h2&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;2
+3
+13
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;hr /&gt;
+&lt;h2 id=&quot;sample-output&quot;&gt;Sample Output&lt;/h2&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;0 1 1 1 0 0 0 0 0 0
+1 6 2 2 1 1 1 1 1 1
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+</content>
+ </entry>
  
  <entry>
    <title>UVA-11264 - Coin Collector</title>
