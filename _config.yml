@@ -9,8 +9,8 @@ gems                : ["jekyll-paginate"]
 permalink           : pretty
 
 # Setup
-title               : NCKU ACM Notes
-tagline             : 'Personal Tech Notes'
+title               : NCKU ACM
+tagline             : 'NCKU ACM'
 description         : 'NCKU ACM Training Course'
 baseurl             : https://nckuacm-notes.github.io/
 
