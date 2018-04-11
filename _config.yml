@@ -10,7 +10,7 @@ permalink           : pretty
 
 # Setup
 title               : NCKU ACM
-tagline             : 'NCKU ACM'
+tagline             : 'NCKU ACM Notes'
 description         : 'NCKU ACM Training Course'
 baseurl             : https://nckuacm-notes.github.io/
 
