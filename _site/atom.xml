@@ -4,13 +4,139 @@
  <title>NCKU ACM</title>
  <link href="https://nckuacm-notes.github.io//atom.xml" rel="self"/>
  <link href="https://nckuacm-notes.github.io//"/>
- <updated>2018-04-11T22:41:24+08:00</updated>
+ <updated>2018-04-15T23:06:43+08:00</updated>
  <id>https://nckuacm-notes.github.io/</id>
  <author>
    <name></name>
    <email></email>
  </author>
 
+ 
+ <entry>
+   <title>UVA-10056 - What is the Probability?</title>
+   <link href="https://nckuacm-notes.github.io//2018/04/14/UVA10056/"/>
+   <updated>2018-04-15T02:00:00+08:00</updated>
+   <id>https://nckuacm-notes.github.io//2018/04/14/UVA10056</id>
+   <content type="html">&lt;blockquote&gt;
+  &lt;ul&gt;
+    &lt;li&gt;UVa Online Judge 解題結果請於 Submit 後，參閱 &lt;a href=&quot;https://uhunt.onlinejudge.org/&quot;&gt;uHunt&lt;/a&gt;。&lt;/li&gt;
+    &lt;li&gt;如果你有任何建議與指教，歡迎於下方留言一起討論喔！&lt;/li&gt;
+    &lt;li&gt;本題選為「20170523 大學程式能力檢定 CPE」題目。&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&quot;題意概要&quot;&gt;題意概要&lt;/h2&gt;
+
+&lt;p&gt;題目給定全部人數、每個人獲勝的機率，並給定所要求第幾個人獲勝的機率。&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;分析：&lt;/strong&gt;由簡單的機率觀念，假設全部有 &lt;script type=&quot;math/tex&quot;&gt;N&lt;/script&gt; 人，每個人獲勝的機率都是 &lt;script type=&quot;math/tex&quot;&gt;p&lt;/script&gt;，則輸掉的機率為 &lt;script type=&quot;math/tex&quot;&gt;q = (1 - p)&lt;/script&gt;。
+    &lt;ul&gt;
+      &lt;li&gt;第一回合
+        &lt;ul&gt;
+          &lt;li&gt;第一個人獲勝的機率：&lt;script type=&quot;math/tex&quot;&gt;p&lt;/script&gt;。&lt;/li&gt;
+          &lt;li&gt;第二個人獲勝的機率：&lt;script type=&quot;math/tex&quot;&gt;q \cdot p&lt;/script&gt;。&lt;/li&gt;
+          &lt;li&gt;第三個人獲勝的機率：&lt;script type=&quot;math/tex&quot;&gt;q^2 \cdot p&lt;/script&gt;。&lt;/li&gt;
+          &lt;li&gt;第&lt;script type=&quot;math/tex&quot;&gt;K&lt;/script&gt;個人獲勝的機率：&lt;script type=&quot;math/tex&quot;&gt;q^{(K-1)} \cdot p&lt;/script&gt;。&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;第二回合：假設第一回合每個人都輸掉。
+        &lt;ul&gt;
+          &lt;li&gt;第一個人獲勝的機率：&lt;script type=&quot;math/tex&quot;&gt;q^N \cdot p&lt;/script&gt;。&lt;/li&gt;
+          &lt;li&gt;第二個人獲勝的機率：&lt;script type=&quot;math/tex&quot;&gt;q^N \cdot q \cdot p&lt;/script&gt;。&lt;/li&gt;
+          &lt;li&gt;第三個人獲勝的機率：&lt;script type=&quot;math/tex&quot;&gt;q^N \cdot q^2 \cdot p&lt;/script&gt;。&lt;/li&gt;
+          &lt;li&gt;第&lt;script type=&quot;math/tex&quot;&gt;K&lt;/script&gt;個人獲勝的機率：&lt;script type=&quot;math/tex&quot;&gt;q^N \cdot q^{(K-1)} \cdot p&lt;/script&gt;。&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;第&lt;script type=&quot;math/tex&quot;&gt;R&lt;/script&gt;回合：
+        &lt;ul&gt;
+          &lt;li&gt;第&lt;script type=&quot;math/tex&quot;&gt;K&lt;/script&gt;個人獲勝的機率：&lt;script type=&quot;math/tex&quot;&gt;q^{(R-1)N} \cdot q^{(K-1)} \cdot p&lt;/script&gt;。&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;唯獨要注意的是，本題要做到小於 &lt;script type=&quot;math/tex&quot;&gt;10^{-7}&lt;/script&gt;才行。&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+&lt;h2 id=&quot;input&quot;&gt;Input&lt;/h2&gt;
+
+&lt;p&gt;Input will contain an integer &lt;script type=&quot;math/tex&quot;&gt;S&lt;/script&gt; (&lt;script type=&quot;math/tex&quot;&gt;S \le 1,000&lt;/script&gt;) at first, which indicates how many sets of inputs are there. The next &lt;script type=&quot;math/tex&quot;&gt;S&lt;/script&gt; lines will contain &lt;script type=&quot;math/tex&quot;&gt;S&lt;/script&gt; sets of inputs. Each line contain an integer &lt;script type=&quot;math/tex&quot;&gt;N&lt;/script&gt; (&lt;script type=&quot;math/tex&quot;&gt;N \le 1,000&lt;/script&gt;) which denotes the number players, a floating point number &lt;script type=&quot;math/tex&quot;&gt;p&lt;/script&gt; which indicates the probability of the happening of a successful event in a single throw (If success means getting &lt;script type=&quot;math/tex&quot;&gt;3&lt;/script&gt; then &lt;script type=&quot;math/tex&quot;&gt;p&lt;/script&gt; is the probability of getting &lt;script type=&quot;math/tex&quot;&gt;3&lt;/script&gt; in a single throw. For a normal dice the probability of getting &lt;script type=&quot;math/tex&quot;&gt;3&lt;/script&gt; is &lt;script type=&quot;math/tex&quot;&gt;1/6&lt;/script&gt;), and &lt;script type=&quot;math/tex&quot;&gt;I&lt;/script&gt; (&lt;script type=&quot;math/tex&quot;&gt;I \le N&lt;/script&gt;) the serial of the player whose winning probability is to be determined (Serial no varies from &lt;script type=&quot;math/tex&quot;&gt;1&lt;/script&gt; to &lt;script type=&quot;math/tex&quot;&gt;N&lt;/script&gt;). You can assume that no invalid probability (&lt;script type=&quot;math/tex&quot;&gt;p&lt;/script&gt;) value will be given as input.&lt;/p&gt;
+
+&lt;hr /&gt;
+&lt;h2 id=&quot;output&quot;&gt;Output&lt;/h2&gt;
+
+&lt;p&gt;For each set of input, output in a single line the probability of the &lt;script type=&quot;math/tex&quot;&gt;I&lt;/script&gt;-th player to win. The output floating point number will always have four digits after the decimal point as shown in the sample output.&lt;/p&gt;
+
+&lt;hr /&gt;
+&lt;h2 id=&quot;sample-input&quot;&gt;Sample Input&lt;/h2&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;2
+2 0.166666 1
+2 0.166666 2
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;hr /&gt;
+&lt;h2 id=&quot;sample-output&quot;&gt;Sample Output&lt;/h2&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;0.5455
+0.4545
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>UVA-12195 - Jingle Composing</title>
+   <link href="https://nckuacm-notes.github.io//2018/04/13/UVA12195/"/>
+   <updated>2018-04-14T02:00:00+08:00</updated>
+   <id>https://nckuacm-notes.github.io//2018/04/13/UVA12195</id>
+   <content type="html">&lt;blockquote&gt;
+  &lt;ul&gt;
+    &lt;li&gt;UVa Online Judge 解題結果請於 Submit 後，參閱 &lt;a href=&quot;https://uhunt.onlinejudge.org/&quot;&gt;uHunt&lt;/a&gt;。&lt;/li&gt;
+    &lt;li&gt;如果你有任何建議與指教，歡迎於下方留言一起討論喔！&lt;/li&gt;
+    &lt;li&gt;本題選為「20170523 大學程式能力檢定 CPE」題目。&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&quot;題意概要&quot;&gt;題意概要&lt;/h2&gt;
+
+&lt;p&gt;題目會給定一首曲子，且每一段以 &lt;code class=&quot;highlighter-rouge&quot;&gt;/&lt;/code&gt; 分段，其中每一段的內的每個音符都有一個拍數 (如下表)，而題目希望能求得每一段的音符拍樹之總和為 &lt;script type=&quot;math/tex&quot;&gt;1&lt;/script&gt;，即符合題目題目所求的「好段」，所求為整首曲子符合「好段」的段數。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://i.imgur.com/AjvHWy9.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;分析：&lt;/strong&gt;本題為簡單的模擬題，每一個段落 (以 &lt;code class=&quot;highlighter-rouge&quot;&gt;/&lt;/code&gt; 分段) 的音符拍數總和為 &lt;script type=&quot;math/tex&quot;&gt;1&lt;/script&gt;，即符合題目所求。提示：可以將題目給定每個音符的拍數全部乘上 &lt;script type=&quot;math/tex&quot;&gt;64&lt;/script&gt; 方便計算，而判斷拍數加總的部分要改為 &lt;script type=&quot;math/tex&quot;&gt;64&lt;/script&gt; 才符合題目所求。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+&lt;h2 id=&quot;input&quot;&gt;Input&lt;/h2&gt;
+
+&lt;p&gt;The input contains several test cases. Each test case is described in a single line containing a string whose length is between &lt;script type=&quot;math/tex&quot;&gt;3&lt;/script&gt; and &lt;script type=&quot;math/tex&quot;&gt;200&lt;/script&gt; characters, inclusive, representing a composition. A composition begins and ends with a slash &lt;code class=&quot;highlighter-rouge&quot;&gt;/&lt;/code&gt;. Measures in a composition are separated by a slash &lt;code class=&quot;highlighter-rouge&quot;&gt;/&lt;/code&gt;. Each note in a measure is represented by the corresponding uppercase letter, as described above. You may assume that each composition contains at least one measure and that each measure contains at least one note.
+All characters in the input will be either slashes or one of the seven uppercase letters used to represent notes, as described above. The last test case is followed by a line containing a single asterisk.&lt;/p&gt;
+
+&lt;hr /&gt;
+&lt;h2 id=&quot;output&quot;&gt;Output&lt;/h2&gt;
+
+&lt;p&gt;For each test case your program must output a single line, containing a single integer, the number of measures that have the right duration.&lt;/p&gt;
+
+&lt;hr /&gt;
+&lt;h2 id=&quot;sample-input&quot;&gt;Sample Input&lt;/h2&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;/HH/QQQQ/XXXTXTEQH/W/HW/
+/W/W/SQHES/
+/WE/TEX/THES/
+*
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;hr /&gt;
+&lt;h2 id=&quot;sample-output&quot;&gt;Sample Output&lt;/h2&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;4
+3
+0
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+</content>
+ </entry>
  
  <entry>
    <title>UVA-1225 - Digit Counting</title>

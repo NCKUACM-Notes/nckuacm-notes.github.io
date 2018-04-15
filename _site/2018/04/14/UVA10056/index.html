@@ -20,16 +20,16 @@
   <link rel="start" title="NCKU-ACM Notes" href="/">
 
   
-    <meta property="og:title" content="UVA-1730 - Sum of MSLCM" >
+    <meta property="og:title" content="UVA-10056 - What is the Probability?" >
     <meta property="og:type" content="article" />
-    <meta property="og:url" content="https://yungshenglu.github.io/2018/04/01/UVA1730/">
-    <meta property="og:description" content="UVa Online Judge 解題結果請於 Submit 後，參閱 uHunt。 如果你有任何建議與指教，歡迎於下方留言一起討論喔！ 本題選為「20180327 大學程式能力檢定 CPE」題目。 題意概要 題目中定義一個數的所有因數 (包含本身和 ) 的總和，為該數字的的 MLCM。本題希望給定一個數字 ，其中 ，能夠求出從 到..." >
-    <meta name="description" content="UVa Online Judge 解題結果請於 Submit 後，參閱 uHunt。 如果你有任何建議與指教，歡迎於下方留言一起討論喔！ 本題選為「20180327 大學程式能力檢定 CPE」題目。 題意概要 題目中定義一個數的所有因數 (包含本身和 ) 的總和，為該數字的的 MLCM。本題希望給定一個數字 ，其中 ，能夠求出從 到..." >
+    <meta property="og:url" content="https://yungshenglu.github.io/2018/04/14/UVA10056/">
+    <meta property="og:description" content="UVa Online Judge 解題結果請於 Submit 後，參閱 uHunt。 如果你有任何建議與指教，歡迎於下方留言一起討論喔！ 本題選為「20170523 大學程式能力檢定 CPE」題目。 題意概要 題目給定全部人數、每個人獲勝的機率，並給定所要求第幾個人獲勝的機率。 分析：由簡單的機率觀念，假設全部有 人，每個人獲勝的機率都是 ，則輸掉的機率為 。 第一回合 第一個人獲勝的機率：。 第二個人獲勝的機率：。..." >
+    <meta name="description" content="UVa Online Judge 解題結果請於 Submit 後，參閱 uHunt。 如果你有任何建議與指教，歡迎於下方留言一起討論喔！ 本題選為「20170523 大學程式能力檢定 CPE」題目。 題意概要 題目給定全部人數、每個人獲勝的機率，並給定所要求第幾個人獲勝的機率。 分析：由簡單的機率觀念，假設全部有 人，每個人獲勝的機率都是 ，則輸掉的機率為 。 第一回合 第一個人獲勝的機率：。 第二個人獲勝的機率：。..." >
   
 
   <title>
     
-      UVA-1730 - Sum of MSLCM &middot; NCKU ACM
+      UVA-10056 - What is the Probability? &middot; NCKU ACM
     
   </title>
 
@@ -268,7 +268,7 @@
 
     <div class="content container">
         <div class="post">
-  <h1 class="post-title">UVA-1730 - Sum of MSLCM</h1>
+  <h1 class="post-title">UVA-10056 - What is the Probability?</h1>
   <span class="post-date">
     <span class="fa-stack fa-sm">
       <i class="fa fa-pencil fa-stack-1x"></i>
@@ -277,7 +277,7 @@
     <span class="fa-stack fa-sm">
       <i class="fa fa-clock-o fa-stack-1x"></i>
     </span>
-    02 Apr 2018
+    15 Apr 2018
     
     
     
@@ -287,7 +287,7 @@
           <span class="fa-stack fa-sm">
             <i class="fa fa-github fa-stack-1x"></i>
           </span>
-          <a href="https://github.com/yungshenglu/OnlineJudgeUVA/tree/master/UVA-1730">GitHub</a>
+          <a href="https://github.com/yungshenglu/OnlineJudgeUVA/tree/master/UVA-10056">GitHub</a>
         </span>
     
 
@@ -296,7 +296,7 @@
           <span class="fa-stack fa-sm">
             <i class="fa fa-external-link fa-stack-1x"></i>
           </span>
-          <a href="https://uva.onlinejudge.org/index.php?option=com_onlinejudge&Itemid=8&page=show_problem&category=&problem=4926&mosmsg=Submission+received+with+ID+21077134">Source Link</a>
+          <a href="https://uva.onlinejudge.org/index.php?option=com_onlinejudge&Itemid=8&page=show_problem&category=115&problem=997&mosmsg=Submission+received+with+ID+21137960">Source Link</a>
         </span>
     
   </span>
@@ -305,44 +305,66 @@
   <ul>
     <li>UVa Online Judge 解題結果請於 Submit 後，參閱 <a href="https://uhunt.onlinejudge.org/">uHunt</a>。</li>
     <li>如果你有任何建議與指教，歡迎於下方留言一起討論喔！</li>
-    <li>本題選為「20180327 大學程式能力檢定 CPE」題目。</li>
+    <li>本題選為「20170523 大學程式能力檢定 CPE」題目。</li>
   </ul>
 </blockquote>
 
 <h2 id="題意概要">題意概要</h2>
 
-<p>題目中定義一個數的所有因數 (包含本身和 <script type="math/tex">1</script>) 的總和，為該數字的的 MLCM。本題希望給定一個數字 <script type="math/tex">N</script>，其中 <script type="math/tex">% <![CDATA[
-1 < N < 20,000,001 %]]></script>，能夠求出從 <script type="math/tex">2</script> 到 <script type="math/tex">N</script> 的所有數字中的 MLCM 之總和。注意題目要求是從 <script type="math/tex">2</script> 開始，故以下分析中會由 <script type="math/tex">1</script> 開始討論，最後需要扣除 <script type="math/tex">1</script>！</p>
+<p>題目給定全部人數、每個人獲勝的機率，並給定所要求第幾個人獲勝的機率。</p>
 
 <ul>
-  <li><strong>分析：</strong>本題為數論題型，假設所求的 <script type="math/tex">N = 10</script>，則將 <script type="math/tex">1</script> - <script type="math/tex">10</script> 每個數的因數列出來後，統計抹個因數出現的次數會發現，由小至大排序，<script type="math/tex">1</script> 總共出現 <script type="math/tex">10</script> 次、<script type="math/tex">2</script> 總共出現 <script type="math/tex">5</script> 次、<script type="math/tex">3</script> 總共出現 <script type="math/tex">3</script> 次、…等。仔細觀察會發現，每個因數出現的次數其實就是 <script type="math/tex">N / i</script> (<script type="math/tex">i = 1, 2, ..., 10</script>)，故直觀來說相當容易。但是，本題最關鍵的地方在於若按照上述的想法去運算，時間複雜度為 <script type="math/tex">O(N)</script> 會超過題目的時間限制 (TLE)，因此本題在「求總和的地方不行逐一相加」。仔細觀察上述統計完的出現次數，會發現出現次數會「隨著因數變大而遞減」，而且連續因數之間的出線次數「可能會連續都一樣」，因此可以在求總和的過程中試著將「連續相同出現次數的因數一起相加」，此方法為「二分搜尋法」的概念，將上界與下界找出來，由梯形公式求總和。最後要注意的是，<em>本題最後要記得扣掉1</em>，原因是上述的討論都是從 <script type="math/tex">1</script> 開始，而題目要求適從 <script type="math/tex">2</script> 開始求總和，故要扣除。</li>
+  <li><strong>分析：</strong>由簡單的機率觀念，假設全部有 <script type="math/tex">N</script> 人，每個人獲勝的機率都是 <script type="math/tex">p</script>，則輸掉的機率為 <script type="math/tex">q = (1 - p)</script>。
+    <ul>
+      <li>第一回合
+        <ul>
+          <li>第一個人獲勝的機率：<script type="math/tex">p</script>。</li>
+          <li>第二個人獲勝的機率：<script type="math/tex">q \cdot p</script>。</li>
+          <li>第三個人獲勝的機率：<script type="math/tex">q^2 \cdot p</script>。</li>
+          <li>第<script type="math/tex">K</script>個人獲勝的機率：<script type="math/tex">q^{(K-1)} \cdot p</script>。</li>
+        </ul>
+      </li>
+      <li>第二回合：假設第一回合每個人都輸掉。
+        <ul>
+          <li>第一個人獲勝的機率：<script type="math/tex">q^N \cdot p</script>。</li>
+          <li>第二個人獲勝的機率：<script type="math/tex">q^N \cdot q \cdot p</script>。</li>
+          <li>第三個人獲勝的機率：<script type="math/tex">q^N \cdot q^2 \cdot p</script>。</li>
+          <li>第<script type="math/tex">K</script>個人獲勝的機率：<script type="math/tex">q^N \cdot q^{(K-1)} \cdot p</script>。</li>
+        </ul>
+      </li>
+      <li>第<script type="math/tex">R</script>回合：
+        <ul>
+          <li>第<script type="math/tex">K</script>個人獲勝的機率：<script type="math/tex">q^{(R-1)N} \cdot q^{(K-1)} \cdot p</script>。</li>
+        </ul>
+      </li>
+      <li>唯獨要注意的是，本題要做到小於 <script type="math/tex">10^{-7}</script>才行。</li>
+    </ul>
+  </li>
 </ul>
 
 <hr />
 <h2 id="input">Input</h2>
 
-<p>Input file contains at most 200 lines. Each line contains a positive integer which denotes the value of <script type="math/tex">N</script> (<script type="math/tex">% <![CDATA[
-1 < N < 20,000,001 %]]></script>). Input is terminated by a line containing a single zero, which should not be processed.</p>
+<p>Input will contain an integer <script type="math/tex">S</script> (<script type="math/tex">S \le 1,000</script>) at first, which indicates how many sets of inputs are there. The next <script type="math/tex">S</script> lines will contain <script type="math/tex">S</script> sets of inputs. Each line contain an integer <script type="math/tex">N</script> (<script type="math/tex">N \le 1,000</script>) which denotes the number players, a floating point number <script type="math/tex">p</script> which indicates the probability of the happening of a successful event in a single throw (If success means getting <script type="math/tex">3</script> then <script type="math/tex">p</script> is the probability of getting <script type="math/tex">3</script> in a single throw. For a normal dice the probability of getting <script type="math/tex">3</script> is <script type="math/tex">1/6</script>), and <script type="math/tex">I</script> (<script type="math/tex">I \le N</script>) the serial of the player whose winning probability is to be determined (Serial no varies from <script type="math/tex">1</script> to <script type="math/tex">N</script>). You can assume that no invalid probability (<script type="math/tex">p</script>) value will be given as input.</p>
 
 <hr />
 <h2 id="output">Output</h2>
 
-<p>For each positive number N in the input, produce one line of output. This line contains an integer which denotes the value 
-<script type="math/tex">\sum_{ i = 2 }^{ N }{ \mathrm{ MSLCM }(i) }</script></p>
+<p>For each set of input, output in a single line the probability of the <script type="math/tex">I</script>-th player to win. The output floating point number will always have four digits after the decimal point as shown in the sample output.</p>
 
 <hr />
 <h2 id="sample-input">Sample Input</h2>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>10
-100
-0
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>2
+2 0.166666 1
+2 0.166666 2
 </code></pre></div></div>
 
 <hr />
 <h2 id="sample-output">Sample Output</h2>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>86
-823080
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>0.5455
+0.4545
 </code></pre></div></div>
 
   <div class="post-tag">
@@ -381,15 +403,6 @@
     
       <li>
         <h3>
-          <a href="/2018/04/14/UVA10056/">
-            UVA-10056 - What is the Probability?
-            <small>15 Apr 2018</small>
-          </a>
-        </h3>
-      </li>
-    
-      <li>
-        <h3>
           <a href="/2018/04/13/UVA12195/">
             UVA-12195 - Jingle Composing
             <small>14 Apr 2018</small>
@@ -406,6 +419,15 @@
         </h3>
       </li>
     
+      <li>
+        <h3>
+          <a href="/2018/04/09/UVA11264/">
+            UVA-11264 - Coin Collector
+            <small>10 Apr 2018</small>
+          </a>
+        </h3>
+      </li>
+    
   </ul>
 </div>
  
@@ -414,8 +436,8 @@
     <script type="text/javascript">
     /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
     var disqus_shortname = 'nckuacm'; // required: replace example with your forum shortname
-    var disqus_identifier = '/2018/04/01/UVA1730/';
-    var disqus_url = 'https://nckuacm-notes.github.com/2018/04/01/UVA1730/';
+    var disqus_identifier = '/2018/04/14/UVA10056/';
+    var disqus_url = 'https://nckuacm-notes.github.com/2018/04/14/UVA10056/';
 
     /* * * DON'T EDIT BELOW THIS LINE * * */
     (function() {
@@ -436,8 +458,8 @@
     <script type="text/javascript">
 /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
 var disqus_shortname = 'nckuacm'; // required: replace example with your forum shortname
-var disqus_identifier = '/2018/04/01/UVA1730/';
-var disqus_url = 'https://nckuacm-notes.github.com/2018/04/01/UVA1730/';
+var disqus_identifier = '/2018/04/14/UVA10056/';
+var disqus_url = 'https://nckuacm-notes.github.com/2018/04/14/UVA10056/';
 
 /* * * DON'T EDIT BELOW THIS LINE * * */
 (function() {
