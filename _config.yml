@@ -23,4 +23,3 @@ paginate            : 5
 # Custom vars
 version             : 0.1.0
 github_username     : NCKUACM-Notes
-theme: jekyll-theme-cayman
