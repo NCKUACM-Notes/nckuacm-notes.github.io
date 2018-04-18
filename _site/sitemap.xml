@@ -2,6 +2,10 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
     <url>
+        <loc>https://nckuacm.github.io/nckuacm_notes/2018/04/15/UVA482/</loc>
+    </url>
+
+    <url>
         <loc>https://nckuacm.github.io/nckuacm_notes/2018/04/14/UVA10056/</loc>
     </url>
 
@@ -160,6 +164,10 @@
 
     <url>
         <loc>https://nckuacm.github.io/nckuacm_notes/page4/</loc>
+    </url>
+
+    <url>
+        <loc>https://nckuacm.github.io/nckuacm_notes/page5/</loc>
     </url>
 
 </urlset>
