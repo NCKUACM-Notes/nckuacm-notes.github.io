@@ -1,0 +1,25 @@
+# Dependencies
+markdown            : kramdown
+redcarpet           :
+  extensions        : ["tables", "autolink", "strikethrough", "space_after_headers", "with_toc_data", "fenced_code_blocks"]
+highlighter         : rouge
+gems                : ["jekyll-paginate"]
+
+# Permalinks
+permalink           : pretty
+
+# Setup
+title               : NCKU ACM
+tagline             : 'NCKU ACM Notes'
+description         : 'NCKU ACM Training Course'
+baseurl             : https://nckuacm-notes.github.io/
+
+author              : NCKU-ACM
+name                : 'NCKU ACM'
+url                 : https://nckuacm-notes.github.io/
+
+paginate            : 5
+
+# Custom vars
+version             : 0.1.0
+github_username     : NCKUACM-Notes
