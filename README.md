@@ -9,9 +9,9 @@ This website is managed by NCKU ACM Training Course Team.
 
 ### 2018 Spring
 
-* [課程連結](2018_Spring/)
-    * [寒訓網站](https://nckuacm-notes.github.io/acp_cheatsheet/2018_spring/index.html)
-    * [課程網站](https://nckuacm-notes.github.io/acp_cheatsheet/2018_spring/course.html)
+* [課程連結](https://nckuacm.github.io/2018)
+    * [寒訓網站](https://nckuacm.github.io/2018/winter.html)
+    * [課程網站](https://nckuacm.github.io/2018)
 
 ---
 ## About NCKUACM Notes
