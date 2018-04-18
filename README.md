@@ -64,7 +64,7 @@ This website is managed by NCKU ACM Training Course Team.
     signature  : true
     slides     :
     present    :
-    github     : https://github.com/yungshenglu/OnlineJudgeUVA/tree/master/UVA-696
+    github     : https://github.com/nckuacm/OnlineJudgeUVa/tree/master/UVA-696
     link       : https://uva.onlinejudge.org/index.php?option=onlinejudge&Itemid=99999999&page=show_problem&category=&problem=637&mosmsg=Submission+received+with+ID+21105757
     ---
     ```
@@ -94,7 +94,7 @@ This website is managed by NCKU ACM Training Course Team.
         * 格式：`true` / `false`
     * `slides` - 投影片連結
         * 預設：空值
-        * 格式：`https://yungshenglu.github.io/slides/投影片檔名`
+        * 格式：`https://github.com/nckuacm/nckuacm_notes/slides/投影片檔名`
     * `present` - 投影片 LIVE 連結 (雲端投影片使用，如：Google Slides、Slides 等)
         * 預設：空值
         * 格式：連結網址
@@ -129,7 +129,7 @@ This website is managed by NCKU ACM Training Course Team.
         $ git commit -m "Update latest post"
         $ git push origin master
         ```
-    7. 發布成功，可以稍等約 1 ~ 2 分鐘，至 `https://nckuacm-notes.github.io` 查看文章發佈的結果。
+    7. 發布成功，可以稍等約 1 ~ 2 分鐘，至 `https://nckuacm.github.io/nckuacm_notes` 查看文章發佈的結果。
 
 ### 如何新增個人簽名檔？
 
