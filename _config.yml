@@ -12,11 +12,11 @@ permalink           : pretty
 title               : NCKU ACM
 tagline             : 'NCKU ACM Notes'
 description         : 'NCKU ACM Training Course'
-baseurl             : https://nckuacm-notes.github.io/
+baseurl             : https://nckuacm.github.io/nckuacm_notes/
 
 author              : NCKU-ACM
 name                : 'NCKU ACM'
-url                 : https://nckuacm-notes.github.io/
+url                 : https://nckuacm.github.io/nckuacm_notes/
 
 paginate            : 5
 
