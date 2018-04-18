@@ -7,7 +7,7 @@ title: Home
   {% for post in paginator.posts %}
   <div class="post">
     <h1 class="post-title">
-      <a href="{{ post.url }}">
+      <a href="nckuacm_notes/{{ post.url }}">
         {{ post.title }}
         {% if post.subtitle %}
         <p class="post-subtitle">
@@ -27,7 +27,7 @@ title: Home
           <span class="fa-stack fa-sm">
               <i class="fa fa-comments fa-stack-1x"></i>
           </span>
-          <a href="https://nckuacm.github.com/nckuacm_notes{{ post.url }}#disqus_thread" data-disqus-identifier="{{ post.url }}"></a>
+          <a href="https://nckuacm.github.io/nckuacm_notes{{ post.url }}#disqus_thread" data-disqus-identifier="{{ post.url }}"></a>
         </div>
       </div>
       <div
