@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
  <title>NCKU ACM</title>
- <link href="https://nckuacm.github.io/nckuacm_notes//atom.xml" rel="self"/>
- <link href="https://nckuacm.github.io/nckuacm_notes//"/>
- <updated>2018-04-18T22:12:54+08:00</updated>
- <id>https://nckuacm.github.io/nckuacm_notes/</id>
+ <link href="http://localhost:4000/atom.xml" rel="self"/>
+ <link href="http://localhost:4000/"/>
+ <updated>2018-04-25T16:05:59+08:00</updated>
+ <id>http://localhost:4000</id>
  <author>
    <name></name>
    <email></email>
@@ -13,10 +13,60 @@
 
  
  <entry>
+   <title>UVA-993 - Product of Digits</title>
+   <link href="http://localhost:4000/2018/04/17/UVA993/"/>
+   <updated>2018-04-17T02:00:00+08:00</updated>
+   <id>http://localhost:4000/2018/04/17/UVA993</id>
+   <content type="html">&lt;blockquote&gt;
+  &lt;ul&gt;
+    &lt;li&gt;UVa Online Judge 解題結果請於 Submit 後，參閱 &lt;a href=&quot;https://uhunt.onlinejudge.org/&quot;&gt;uHunt&lt;/a&gt;。&lt;/li&gt;
+    &lt;li&gt;如果你有任何建議與指教，歡迎於下方留言一起討論喔！&lt;/li&gt;
+    &lt;li&gt;本題選為「20170328 大學程式能力檢定 CPE」題目。&lt;/li&gt;
+    &lt;li&gt;&lt;strong&gt;相同題目：&lt;/strong&gt;ZOJ-d418&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&quot;題意概要&quot;&gt;題意概要&lt;/h2&gt;
+
+&lt;p&gt;給你一個大於等於 &lt;script type=&quot;math/tex&quot;&gt;0&lt;/script&gt; 的整數 &lt;script type=&quot;math/tex&quot;&gt;N&lt;/script&gt;，請你你找到最小的自然數 &lt;script type=&quot;math/tex&quot;&gt;Q&lt;/script&gt; ，使得在 &lt;script type=&quot;math/tex&quot;&gt;Q&lt;/script&gt; 中所有數字（digit）的乘積等於 &lt;script type=&quot;math/tex&quot;&gt;N&lt;/script&gt;。&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;分析：&lt;/strong&gt;本題為簡單的貪婪法 (Greedy Method)，如果 &lt;script type=&quot;math/tex&quot;&gt;N = 1&lt;/script&gt;，則可以直接回傳 &lt;script type=&quot;math/tex&quot;&gt;1&lt;/script&gt; 即是答案，其他數字 (&lt;script type=&quot;math/tex&quot;&gt;N &gt; 1&lt;/script&gt;) 從 &lt;script type=&quot;math/tex&quot;&gt;9&lt;/script&gt; 開始遞減，只要可以整除 &lt;script type=&quot;math/tex&quot;&gt;N&lt;/script&gt; ，就加進答案內。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+&lt;h2 id=&quot;input&quot;&gt;Input&lt;/h2&gt;
+
+&lt;p&gt;The first line of input contains one positive integer number, which is the number of data sets. Each subsequent line contains one data set which consists of one non-negative integer number &lt;script type=&quot;math/tex&quot;&gt;N&lt;/script&gt; (&lt;script type=&quot;math/tex&quot;&gt;0 \le N \le 109&lt;/script&gt;).&lt;/p&gt;
+
+&lt;hr /&gt;
+&lt;h2 id=&quot;output&quot;&gt;Output&lt;/h2&gt;
+
+&lt;p&gt;For each data set, write one line containing the corresponding natural number &lt;script type=&quot;math/tex&quot;&gt;Q&lt;/script&gt; or &lt;code class=&quot;highlighter-rouge&quot;&gt;-1&lt;/code&gt; if &lt;script type=&quot;math/tex&quot;&gt;Q&lt;/script&gt; does not exist.&lt;/p&gt;
+
+&lt;hr /&gt;
+&lt;h2 id=&quot;sample-input&quot;&gt;Sample Input&lt;/h2&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;3
+1
+10
+123456789
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;hr /&gt;
+&lt;h2 id=&quot;sample-output&quot;&gt;Sample Output&lt;/h2&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;1
+25
+-1
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+</content>
+ </entry>
+ 
+ <entry>
    <title>UVA-482 - Permutation Arrays</title>
-   <link href="https://nckuacm.github.io/nckuacm_notes//2018/04/15/UVA482/"/>
+   <link href="http://localhost:4000/2018/04/16/UVA482/"/>
    <updated>2018-04-16T02:00:00+08:00</updated>
-   <id>https://nckuacm.github.io/nckuacm_notes//2018/04/15/UVA482</id>
+   <id>http://localhost:4000/2018/04/16/UVA482</id>
    <content type="html">&lt;blockquote&gt;
   &lt;ul&gt;
     &lt;li&gt;UVa Online Judge 解題結果請於 Submit 後，參閱 &lt;a href=&quot;https://uhunt.onlinejudge.org/&quot;&gt;uHunt&lt;/a&gt;。&lt;/li&gt;
@@ -62,9 +112,9 @@
  
  <entry>
    <title>UVA-10056 - What is the Probability?</title>
-   <link href="https://nckuacm.github.io/nckuacm_notes//2018/04/14/UVA10056/"/>
+   <link href="http://localhost:4000/2018/04/15/UVA10056/"/>
    <updated>2018-04-15T02:00:00+08:00</updated>
-   <id>https://nckuacm.github.io/nckuacm_notes//2018/04/14/UVA10056</id>
+   <id>http://localhost:4000/2018/04/15/UVA10056</id>
    <content type="html">&lt;blockquote&gt;
   &lt;ul&gt;
     &lt;li&gt;UVa Online Judge 解題結果請於 Submit 後，參閱 &lt;a href=&quot;https://uhunt.onlinejudge.org/&quot;&gt;uHunt&lt;/a&gt;。&lt;/li&gt;
@@ -135,9 +185,9 @@
  
  <entry>
    <title>UVA-12195 - Jingle Composing</title>
-   <link href="https://nckuacm.github.io/nckuacm_notes//2018/04/13/UVA12195/"/>
+   <link href="http://localhost:4000/2018/04/14/UVA12195/"/>
    <updated>2018-04-14T02:00:00+08:00</updated>
-   <id>https://nckuacm.github.io/nckuacm_notes//2018/04/13/UVA12195</id>
+   <id>http://localhost:4000/2018/04/14/UVA12195</id>
    <content type="html">&lt;blockquote&gt;
   &lt;ul&gt;
     &lt;li&gt;UVa Online Judge 解題結果請於 Submit 後，參閱 &lt;a href=&quot;https://uhunt.onlinejudge.org/&quot;&gt;uHunt&lt;/a&gt;。&lt;/li&gt;
@@ -188,9 +238,9 @@ All characters in the input will be either slashes or one of the seven uppercase
  
  <entry>
    <title>UVA-1225 - Digit Counting</title>
-   <link href="https://nckuacm.github.io/nckuacm_notes//2018/04/10/UVA1225/"/>
+   <link href="http://localhost:4000/2018/04/11/UVA1225/"/>
    <updated>2018-04-11T02:00:00+08:00</updated>
-   <id>https://nckuacm.github.io/nckuacm_notes//2018/04/10/UVA1225</id>
+   <id>http://localhost:4000/2018/04/11/UVA1225</id>
    <content type="html">&lt;blockquote&gt;
   &lt;ul&gt;
     &lt;li&gt;UVa Online Judge 解題結果請於 Submit 後，參閱 &lt;a href=&quot;https://uhunt.onlinejudge.org/&quot;&gt;uHunt&lt;/a&gt;。&lt;/li&gt;
@@ -267,9 +317,9 @@ All characters in the input will be either slashes or one of the seven uppercase
  
  <entry>
    <title>UVA-11264 - Coin Collector</title>
-   <link href="https://nckuacm.github.io/nckuacm_notes//2018/04/09/UVA11264/"/>
+   <link href="http://localhost:4000/2018/04/10/UVA11264/"/>
    <updated>2018-04-10T02:00:00+08:00</updated>
-   <id>https://nckuacm.github.io/nckuacm_notes//2018/04/09/UVA11264</id>
+   <id>http://localhost:4000/2018/04/10/UVA11264</id>
    <content type="html">&lt;blockquote&gt;
   &lt;ul&gt;
     &lt;li&gt;UVa Online Judge 解題結果請於 Submit 後，參閱 &lt;a href=&quot;https://uhunt.onlinejudge.org/&quot;&gt;uHunt&lt;/a&gt;。&lt;/li&gt;
@@ -332,9 +382,9 @@ C_1 &lt; C_2 &lt; C_3 &lt; . . . &lt; C_n &lt; 1,000,000,000 %]]&gt;&lt;/script&
  
  <entry>
    <title>UVA-696 - How Many Knights</title>
-   <link href="https://nckuacm.github.io/nckuacm_notes//2018/04/08/UVA696/"/>
+   <link href="http://localhost:4000/2018/04/09/UVA696/"/>
    <updated>2018-04-09T02:00:00+08:00</updated>
-   <id>https://nckuacm.github.io/nckuacm_notes//2018/04/08/UVA696</id>
+   <id>http://localhost:4000/2018/04/09/UVA696</id>
    <content type="html">&lt;blockquote&gt;
   &lt;ul&gt;
     &lt;li&gt;UVa Online Judge 解題結果請於 Submit 後，參閱 &lt;a href=&quot;https://uhunt.onlinejudge.org/&quot;&gt;uHunt&lt;/a&gt;。&lt;/li&gt;
@@ -484,9 +534,9 @@ C_1 &lt; C_2 &lt; C_3 &lt; . . . &lt; C_n &lt; 1,000,000,000 %]]&gt;&lt;/script&
  
  <entry>
    <title>UVA-11743 - Credit Check</title>
-   <link href="https://nckuacm.github.io/nckuacm_notes//2018/04/07/UVA11743/"/>
+   <link href="http://localhost:4000/2018/04/08/UVA11743/"/>
    <updated>2018-04-08T02:00:00+08:00</updated>
-   <id>https://nckuacm.github.io/nckuacm_notes//2018/04/07/UVA11743</id>
+   <id>http://localhost:4000/2018/04/08/UVA11743</id>
    <content type="html">&lt;blockquote&gt;
   &lt;ul&gt;
     &lt;li&gt;UVa Online Judge 解題結果請於 Submit 後，參閱 &lt;a href=&quot;https://uhunt.onlinejudge.org/&quot;&gt;uHunt&lt;/a&gt;。&lt;/li&gt;
@@ -543,9 +593,9 @@ Valid
  
  <entry>
    <title>UVA-299 - Train Swapping</title>
-   <link href="https://nckuacm.github.io/nckuacm_notes//2018/04/06/UVA299/"/>
+   <link href="http://localhost:4000/2018/04/07/UVA299/"/>
    <updated>2018-04-07T02:00:00+08:00</updated>
-   <id>https://nckuacm.github.io/nckuacm_notes//2018/04/06/UVA299</id>
+   <id>http://localhost:4000/2018/04/07/UVA299</id>
    <content type="html">&lt;blockquote&gt;
   &lt;ul&gt;
     &lt;li&gt;UVa Online Judge 解題結果請於 Submit 後，參閱 &lt;a href=&quot;https://uhunt.onlinejudge.org/&quot;&gt;uHunt&lt;/a&gt;。&lt;/li&gt;
@@ -596,9 +646,9 @@ Optimal train swapping takes 1 swaps.
  
  <entry>
    <title>UVA-10142 - Australian Voting</title>
-   <link href="https://nckuacm.github.io/nckuacm_notes//2018/04/05/UVA10142/"/>
+   <link href="http://localhost:4000/2018/04/06/UVA10142/"/>
    <updated>2018-04-06T02:00:00+08:00</updated>
-   <id>https://nckuacm.github.io/nckuacm_notes//2018/04/05/UVA10142</id>
+   <id>http://localhost:4000/2018/04/06/UVA10142</id>
    <content type="html">&lt;blockquote&gt;
   &lt;ul&gt;
     &lt;li&gt;UVa Online Judge 解題結果請於 Submit 後，參閱 &lt;a href=&quot;https://uhunt.onlinejudge.org/&quot;&gt;uHunt&lt;/a&gt;。&lt;/li&gt;
@@ -650,9 +700,9 @@ Sirhan Sirhan
  
  <entry>
    <title>UVA-11233 - Deli Deli</title>
-   <link href="https://nckuacm.github.io/nckuacm_notes//2018/04/04/UVA11233/"/>
+   <link href="http://localhost:4000/2018/04/05/UVA11233/"/>
    <updated>2018-04-05T02:00:00+08:00</updated>
-   <id>https://nckuacm.github.io/nckuacm_notes//2018/04/04/UVA11233</id>
+   <id>http://localhost:4000/2018/04/05/UVA11233</id>
    <content type="html">&lt;blockquote&gt;
   &lt;ul&gt;
     &lt;li&gt;UVa Online Judge 解題結果請於 Submit 後，參閱 &lt;a href=&quot;https://uhunt.onlinejudge.org/&quot;&gt;uHunt&lt;/a&gt;。&lt;/li&gt;
@@ -717,9 +767,9 @@ turkeys
  
  <entry>
    <title>UVA-10071 - Back to High School Physics</title>
-   <link href="https://nckuacm.github.io/nckuacm_notes//2018/04/03/UVA10071/"/>
+   <link href="http://localhost:4000/2018/04/04/UVA10071/"/>
    <updated>2018-04-04T02:00:00+08:00</updated>
-   <id>https://nckuacm.github.io/nckuacm_notes//2018/04/03/UVA10071</id>
+   <id>http://localhost:4000/2018/04/04/UVA10071</id>
    <content type="html">&lt;blockquote&gt;
   &lt;ul&gt;
     &lt;li&gt;UVa Online Judge 解題結果請於 Submit 後，參閱 &lt;a href=&quot;https://uhunt.onlinejudge.org/&quot;&gt;uHunt&lt;/a&gt;。&lt;/li&gt;
@@ -765,9 +815,9 @@ turkeys
  
  <entry>
    <title>UVA-10591 - Happy Number</title>
-   <link href="https://nckuacm.github.io/nckuacm_notes//2018/04/02/UVA10591/"/>
+   <link href="http://localhost:4000/2018/04/03/UVA10591/"/>
    <updated>2018-04-03T02:00:00+08:00</updated>
-   <id>https://nckuacm.github.io/nckuacm_notes//2018/04/02/UVA10591</id>
+   <id>http://localhost:4000/2018/04/03/UVA10591</id>
    <content type="html">&lt;blockquote&gt;
   &lt;ul&gt;
     &lt;li&gt;UVa Online Judge 解題結果請於 Submit 後，參閱 &lt;a href=&quot;https://uhunt.onlinejudge.org/&quot;&gt;uHunt&lt;/a&gt;。&lt;/li&gt;
@@ -820,9 +870,9 @@ Case #3: 13 is a Happy number.
  
  <entry>
    <title>UVA-1730 - Sum of MSLCM</title>
-   <link href="https://nckuacm.github.io/nckuacm_notes//2018/04/01/UVA1730/"/>
+   <link href="http://localhost:4000/2018/04/02/UVA1730/"/>
    <updated>2018-04-02T02:00:00+08:00</updated>
-   <id>https://nckuacm.github.io/nckuacm_notes//2018/04/01/UVA1730</id>
+   <id>http://localhost:4000/2018/04/02/UVA1730</id>
    <content type="html">&lt;blockquote&gt;
   &lt;ul&gt;
     &lt;li&gt;UVa Online Judge 解題結果請於 Submit 後，參閱 &lt;a href=&quot;https://uhunt.onlinejudge.org/&quot;&gt;uHunt&lt;/a&gt;。&lt;/li&gt;
@@ -871,9 +921,9 @@ Case #3: 13 is a Happy number.
  
  <entry>
    <title>UVA-10004 - Bicoloring</title>
-   <link href="https://nckuacm.github.io/nckuacm_notes//2018/03/31/UVA10004/"/>
+   <link href="http://localhost:4000/2018/04/01/UVA10004/"/>
    <updated>2018-04-01T02:00:00+08:00</updated>
-   <id>https://nckuacm.github.io/nckuacm_notes//2018/03/31/UVA10004</id>
+   <id>http://localhost:4000/2018/04/01/UVA10004</id>
    <content type="html">&lt;blockquote&gt;
   &lt;ul&gt;
     &lt;li&gt;UVa Online Judge 解題結果請於 Submit 後，參閱 &lt;a href=&quot;https://uhunt.onlinejudge.org/&quot;&gt;uHunt&lt;/a&gt;。&lt;/li&gt;
@@ -945,9 +995,9 @@ BICOLORABLE.
  
  <entry>
    <title>UVA-10642 - Can You Solve It?</title>
-   <link href="https://nckuacm.github.io/nckuacm_notes//2018/03/30/UVA10642/"/>
+   <link href="http://localhost:4000/2018/03/31/UVA10642/"/>
    <updated>2018-03-31T02:00:00+08:00</updated>
-   <id>https://nckuacm.github.io/nckuacm_notes//2018/03/30/UVA10642</id>
+   <id>http://localhost:4000/2018/03/31/UVA10642</id>
    <content type="html">&lt;blockquote&gt;
   &lt;ul&gt;
     &lt;li&gt;UVa Online Judge 解題結果請於 Submit 後，參閱 &lt;a href=&quot;https://uhunt.onlinejudge.org/&quot;&gt;uHunt&lt;/a&gt;。&lt;/li&gt;
@@ -997,9 +1047,9 @@ Case 3: 3
  
  <entry>
    <title>UVA-118 - Mutant Flatworld Explorers</title>
-   <link href="https://nckuacm.github.io/nckuacm_notes//2018/03/29/UVA118/"/>
+   <link href="http://localhost:4000/2018/03/30/UVA118/"/>
    <updated>2018-03-30T02:00:00+08:00</updated>
-   <id>https://nckuacm.github.io/nckuacm_notes//2018/03/29/UVA118</id>
+   <id>http://localhost:4000/2018/03/30/UVA118</id>
    <content type="html">&lt;blockquote&gt;
   &lt;ul&gt;
     &lt;li&gt;UVa Online Judge 解題結果請於 Submit 後，參閱 &lt;a href=&quot;https://uhunt.onlinejudge.org/&quot;&gt;uHunt&lt;/a&gt;。&lt;/li&gt;
@@ -1056,9 +1106,9 @@ LLFFFLFLFL
  
  <entry>
    <title>UVA-10633 - Rare Easy Problem</title>
-   <link href="https://nckuacm.github.io/nckuacm_notes//2018/03/28/UVA10633/"/>
+   <link href="http://localhost:4000/2018/03/29/UVA10633/"/>
    <updated>2018-03-29T02:00:00+08:00</updated>
-   <id>https://nckuacm.github.io/nckuacm_notes//2018/03/28/UVA10633</id>
+   <id>http://localhost:4000/2018/03/29/UVA10633</id>
    <content type="html">&lt;blockquote&gt;
   &lt;ul&gt;
     &lt;li&gt;UVa Online Judge 解題結果請於 Submit 後，參閱 &lt;a href=&quot;https://uhunt.onlinejudge.org/&quot;&gt;uHunt&lt;/a&gt;。&lt;/li&gt;
@@ -1102,9 +1152,9 @@ LLFFFLFLFL
  
  <entry>
    <title>UVA-488 - Triangle Wave</title>
-   <link href="https://nckuacm.github.io/nckuacm_notes//2018/03/27/UVA488/"/>
+   <link href="http://localhost:4000/2018/03/28/UVA488/"/>
    <updated>2018-03-28T02:00:00+08:00</updated>
-   <id>https://nckuacm.github.io/nckuacm_notes//2018/03/27/UVA488</id>
+   <id>http://localhost:4000/2018/03/28/UVA488</id>
    <content type="html">&lt;blockquote&gt;
   &lt;ul&gt;
     &lt;li&gt;UVa Online Judge 解題結果請於 Submit 後，參閱 &lt;a href=&quot;https://uhunt.onlinejudge.org/&quot;&gt;uHunt&lt;/a&gt;。&lt;/li&gt;
@@ -1163,9 +1213,9 @@ LLFFFLFLFL
  
  <entry>
    <title>UVA-10026 - Shoemaker’s problem</title>
-   <link href="https://nckuacm.github.io/nckuacm_notes//2018/03/26/UVA10026/"/>
+   <link href="http://localhost:4000/2018/03/27/UVA10026/"/>
    <updated>2018-03-27T02:00:00+08:00</updated>
-   <id>https://nckuacm.github.io/nckuacm_notes//2018/03/26/UVA10026</id>
+   <id>http://localhost:4000/2018/03/27/UVA10026</id>
    <content type="html">&lt;blockquote&gt;
   &lt;ul&gt;
     &lt;li&gt;UVa Online Judge 解題結果請於 Submit 後，參閱 &lt;a href=&quot;https://uhunt.onlinejudge.org/&quot;&gt;uHunt&lt;/a&gt;。&lt;/li&gt;
@@ -1213,9 +1263,9 @@ LLFFFLFLFL
  
  <entry>
    <title>UVA-11727 - Cost Cutting</title>
-   <link href="https://nckuacm.github.io/nckuacm_notes//2018/03/25/UVA11727/"/>
+   <link href="http://localhost:4000/2018/03/26/UVA11727/"/>
    <updated>2018-03-26T02:00:00+08:00</updated>
-   <id>https://nckuacm.github.io/nckuacm_notes//2018/03/25/UVA11727</id>
+   <id>http://localhost:4000/2018/03/26/UVA11727</id>
    <content type="html">&lt;blockquote&gt;
   &lt;ul&gt;
     &lt;li&gt;UVa Online Judge 解題結果請於 Submit 後，參閱 &lt;a href=&quot;https://uhunt.onlinejudge.org/&quot;&gt;uHunt&lt;/a&gt;。&lt;/li&gt;
@@ -1263,9 +1313,9 @@ Case 3: 1500
  
  <entry>
    <title>UVA-10420 - List of Conquests</title>
-   <link href="https://nckuacm.github.io/nckuacm_notes//2018/03/24/UVA10420/"/>
+   <link href="http://localhost:4000/2018/03/25/UVA10420/"/>
    <updated>2018-03-25T02:00:00+08:00</updated>
-   <id>https://nckuacm.github.io/nckuacm_notes//2018/03/24/UVA10420</id>
+   <id>http://localhost:4000/2018/03/25/UVA10420</id>
    <content type="html">&lt;blockquote&gt;
   &lt;ul&gt;
     &lt;li&gt;UVa Online Judge 解題結果請於 Submit 後，參閱 &lt;a href=&quot;https://uhunt.onlinejudge.org/&quot;&gt;uHunt&lt;/a&gt;。&lt;/li&gt;

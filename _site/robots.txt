@@ -1,2 +1,2 @@
 User-agent: *
-Sitemap: <https://nckuacm.github.io/nckuacm_notes/sitemap.xml>
+Sitemap: <http://localhost:4000sitemap.xml>
