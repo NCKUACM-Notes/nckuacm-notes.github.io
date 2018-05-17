@@ -64,8 +64,8 @@ This website is managed by NCKU ACM Training Course Team.
     signature  : true
     slides     :
     present    :
-    github     : https://github.com/yungshenglu/OnlineJudgeUVA/tree/master/UVA-696
-    link       : https://uva.onlinejudge.org/index.php?option=onlinejudge&Itemid=99999999&page=show_problem&category=&problem=637&mosmsg=Submission+received+with+ID+21105757
+    github     : 
+    link       : 
     ---
     ```
     * `layout` - 文章版面格式
@@ -129,7 +129,7 @@ This website is managed by NCKU ACM Training Course Team.
         $ git commit -m "Update latest post"
         $ git push origin master
         ```
-    7. 發布成功，可以稍等約 1 ~ 2 分鐘，至 `https://nckuacm-notes.github.io` 查看文章發佈的結果。
+    7. 發布成功，可以稍等約 1 ~ 2 分鐘，至 `https://nckuacm.github.io/nckuacm_notes/` 查看文章發佈的結果。
 
 ### 如何新增個人簽名檔？
 
@@ -170,8 +170,3 @@ This website is managed by NCKU ACM Training Course Team.
     ```
     * `page.author` 後要判斷「是否符合用戶的名字」(即：`Author Name`)，其中這個名稱即為「之後用戶發佈文章所用的名字」。
     * `author_name.html` 即是「引入該用戶的簽名檔」。
-
----
-## Reference
-
-* [C++ STL \<algorithm\> 使用](http://www.cplusplus.com/reference/algorithm/)
